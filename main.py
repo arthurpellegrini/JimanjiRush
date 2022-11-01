@@ -3,7 +3,7 @@
 import os
 import pygame
 
-from sources import Game, Score, UserScore
+from sources import Game
 
 
 def get_assets() -> dict:

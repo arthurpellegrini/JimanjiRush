@@ -1,52 +1,68 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-s
-import sys
 import pygame
+import re
 from .menu import MainMenu, CreditsMenu, ScoreMenu
+from .score import Score, UserScore
 
 
 class Game:
     def __init__(self, assets: dict):
         pygame.init()
         self.running, self.playing = True, False
+        self.first_time = True
 
+        self.event_unicode = ""
         self.LEFT_KEY, self.RIGHT_KEY, self.DOWN_KEY, self.UP_KEY = False, False, False, False
-        self.ENTER_KEY, self.ESC_KEY = False, False
+        self.ENTER_KEY, self.ESC_KEY, self.BACKSPACE, self.SPACE = False, False, False, False
 
         self.DISPLAY_W, self.DISPLAY_H = 1280, 720
         self.display = pygame.Surface((self.DISPLAY_W, self.DISPLAY_H))
         self.window = pygame.display.set_mode((self.DISPLAY_W, self.DISPLAY_H))
         self.assets = assets
         self.BLACK, self.WHITE = (0, 0, 0), (255, 255, 255)
+        self.BACKGROUND_COLOR = (78, 150, 142)
         self.main_menu = MainMenu(self)
-        self.options = ScoreMenu(self)
+        self.score_menu = ScoreMenu(self)
         self.credits = CreditsMenu(self)
         self.curr_menu = self.main_menu
+
+        self.score = Score()
 
     def game_loop(self):
         while self.playing:
             self.check_events()  # vérifie les entrées
-            if self.ESC_KEY:    # Le joueur veut-il quitter la partie
+            if self.ESC_KEY:  # Le joueur veut-il quitter la partie
                 self.playing = False
+                self.first_time = True
 
-            # self.display.fill(self.BLACK)
             self.display.blit(pygame.transform.scale(self.assets["BACKGROUND"][0],
-                              (self.DISPLAY_W, self.DISPLAY_H)), (0, 0))
+                                                     (self.DISPLAY_W, self.DISPLAY_H)), (0, 0))
+
             self.draw_text('Thanks for Playing', 20, self.DISPLAY_W / 2, self.DISPLAY_H / 2)
+
             self.window.blit(self.display, (0, 0))
             pygame.display.update()
             self.reset_keys()  # on nettoie les entrées
 
     def check_events(self):
         for event in pygame.event.get():
+
             if event.type == pygame.QUIT:
                 self.running, self.playing = False, False
                 self.curr_menu.run_display = False
+                self.score.write_score_file()
+
             if event.type == pygame.KEYDOWN:
+                self.event_unicode = event.unicode
                 if event.key == pygame.K_RETURN:
                     self.ENTER_KEY = True
                 if event.key == pygame.K_ESCAPE:
                     self.ESC_KEY = True
+                if event.key == pygame.K_BACKSPACE:
+                    self.BACKSPACE = True
+                if event.key == pygame.K_SPACE:
+                    self.SPACE = True
                 if event.key == pygame.K_DOWN:
                     self.DOWN_KEY = True
                 if event.key == pygame.K_UP:
@@ -58,7 +74,7 @@ class Game:
 
     def reset_keys(self):
         self.LEFT_KEY, self.RIGHT_KEY, self.DOWN_KEY, self.UP_KEY = False, False, False, False
-        self.ENTER_KEY, self.ESC_KEY = False, False
+        self.ENTER_KEY, self.ESC_KEY, self.BACKSPACE, self.SPACE = False, False, False, False
 
     def draw_text(self, text, size, x, y):
         font = pygame.font.Font(self.assets["FONT"], size)
