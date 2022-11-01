@@ -84,7 +84,29 @@ class Game:
         self.display.blit(text_surface, text_rect)
 
     def display_time(self):
-        print("")
-        #scoredisplay = myFont.render("DISTANCE {0}".format(int(new_score.get_distance())), True, (255, 255, 255))
-        #new_score.update_distance()
-        #return self.display.blit(scoredisplay, (5, 10))
+        pass
+
+    # def input_name(self) -> str:
+    #     finish = False
+    #     pattern = re.compile(r"([0-9A-Za-z]){1,10}", re.IGNORECASE)
+    #
+    #     self.display.fill(self.BACKGROUND_COLOR)
+    #     self.draw_text("Your name: ", 40, self.DISPLAY_W / 3, self.DISPLAY_H / 2)
+    #
+    #     pygame.display.update()
+    #     user_input_value = ""
+    #
+    #     while not finish:
+    #         self.check_events()
+    #         if self.SPACE:
+    #             finish = True
+    #         elif self.BACKSPACE:
+    #             user_input_value = user_input_value[:-1]
+    #         if pattern.match(self.event_unicode) is not None:
+    #             user_input_value += self.event_unicode
+    #         print(user_input_value)
+    #         self.draw_text(user_input_value, 40, self.DISPLAY_W * 2, self.DISPLAY_H / 2)
+    #
+    #         self.reset_keys()
+    #
+    #     return user_input_value
