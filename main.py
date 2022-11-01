@@ -3,7 +3,7 @@
 import os
 import pygame
 
-from sources import Game
+from sources import Game, Score, UserScore
 
 
 def get_assets() -> dict:
@@ -43,3 +43,10 @@ if __name__ == "__main__":
     while game.running:
         game.curr_menu.display_menu()
         game.game_loop()
+
+    # MODIFY SCORE
+    # score = Score()
+    # score.add_user(UserScore("XXXXXXXXXXXXXXXXXXXX", 9828, 1000.0))
+    # score.write_score_file()
+
+
