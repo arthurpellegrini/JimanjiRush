@@ -19,6 +19,8 @@ class Game:
         self.DISPLAY_W, self.DISPLAY_H = 1280, 720
         self.display = pygame.Surface((self.DISPLAY_W, self.DISPLAY_H))
         self.window = pygame.display.set_mode((self.DISPLAY_W, self.DISPLAY_H))
+
+        # TODO: Modifier l'icône et le nom de la fenêtre principale
         self.assets = assets
         self.BLACK, self.WHITE = (0, 0, 0), (255, 255, 255)
         self.BACKGROUND_COLOR = (78, 150, 142)
