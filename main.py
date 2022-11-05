@@ -3,7 +3,7 @@
 import os
 import pygame
 
-from sources import Game
+from sources import Game, Constants
 
 
 def get_assets() -> dict:
@@ -38,7 +38,8 @@ def get_assets() -> dict:
 
 
 if __name__ == "__main__":
-    game = Game(get_assets())
+    Constants.ASSETS = get_assets()
+    game = Game()
 
     while game.running:
         game.curr_menu.display_menu()

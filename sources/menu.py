@@ -1,12 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-s
 import pygame
+from .constants import Constants
 
 
 class Menu:
     def __init__(self, game):
         self.game = game
-        self.mid_w, self.mid_h = self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 4
+        self.mid_w, self.mid_h = Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 4
         self.run_display = True
         self.cursor_rect = pygame.Rect(0, 0, 20, 20)
         self.offset = - 150
@@ -34,7 +35,7 @@ class MainMenu(Menu):
         while self.run_display:
             self.game.check_events()
             self.check_input()
-            self.game.display.fill(self.game.BACKGROUND_COLOR)
+            self.game.display.fill(Constants.BACKGROUND)
             self.game.draw_text("Jimanji Rush", 80, self.mid_w, self.mid_h)
             self.game.draw_text("GAME", 40, self.startx, self.starty)
             self.game.draw_text("SCORES", 40, self.optionsx, self.optionsy)
@@ -84,8 +85,8 @@ class ScoreMenu(Menu):
         self.run_display = True
         while self.run_display:
             self.check_input()
-            self.game.display.fill(self.game.BACKGROUND_COLOR)
-            self.game.draw_text('SCORES', 80, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 4)
+            self.game.display.fill(Constants.BACKGROUND)
+            self.game.draw_text('SCORES', 80, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 4)
             self.display_scores()
             self.blit_screen()
 
@@ -96,14 +97,15 @@ class ScoreMenu(Menu):
             self.run_display = False
 
     def display_scores(self):
-        height = self.game.DISPLAY_H / 4 + 150
-        width = self.game.DISPLAY_W / 4
+        height = Constants.DISPLAY_H / 4 + 150
+        width = Constants.DISPLAY_W / 4
 
         self.game.draw_text("NAME", 40, width, height)
         self.game.draw_text("SCORE", 40, width * 2, height)
         self.game.draw_text("TIME(sec)", 40, width * 3, height)
 
-        for score in self.game.score.get_best_users():
+        # TODO: changer la couleur des lignes pour les 3 premiers joueurs (OR, ARGENT, BRONZE)
+        for score in self.game.scores.get_best_users():
             height += 50
             self.game.draw_text(str(score.name), 40, width, height)
             self.game.draw_text(str(score.score), 40, width * 2, height)
@@ -118,11 +120,11 @@ class CreditsMenu(Menu):
         self.run_display = True
         while self.run_display:
             self.check_input()
-            self.game.display.fill(self.game.BACKGROUND_COLOR)
-            self.game.draw_text('CREDITS', 80, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 4)
-            self.game.draw_text('Arthur PELLEGRINI', 40, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 4 + 150)
-            self.game.draw_text('Clement BRISSARD', 40, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 4 + 200)
-            self.game.draw_text('Osama RAHIM', 40, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 4 + 250)
+            self.game.display.fill(Constants.BACKGROUND)
+            self.game.draw_text('CREDITS', 80, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 4)
+            self.game.draw_text('Arthur PELLEGRINI', 40, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 4 + 150)
+            self.game.draw_text('Clement BRISSARD', 40, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 4 + 200)
+            self.game.draw_text('Osama RAHIM', 40, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 4 + 250)
             self.blit_screen()
 
     def check_input(self):
