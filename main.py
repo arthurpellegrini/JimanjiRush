@@ -32,8 +32,10 @@ def get_assets() -> dict:
                 assets[parent_elem_dir_name].append(pygame.image.load(sub_parent_elem_path))
 
         else:  # Sinon on sait que c'est la police
-            if parent_elem_path.split(".")[-1] == "TTF":  # Si c'est un fichier TTF
+            if parent_elem_path.split(".")[-1] == "ttf":
                 assets["FONT"] = parent_elem_path
+            if parent_elem_path.split(".")[-1] == "png":
+                assets["ICON"] = pygame.image.load(parent_elem_path)
     return assets
 
 
@@ -42,12 +44,5 @@ if __name__ == "__main__":
     game = Game()
 
     while game.running:
-        game.curr_menu.display_menu()
+        game.current_menu.display_menu()
         game.game_loop()
-
-    # MODIFY SCORE
-    # score = Score()
-    # score.add_user(UserScore("XXXXXXXXXXXXXXXXXXXX", 9828, 1000.0))
-    # score.write_score_file()
-
-
