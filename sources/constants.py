@@ -10,10 +10,14 @@ class Constants:
     ASSETS: dict
 
     # COLOR
-    WHITE = (255, 255, 255)
-    BLACK = (0, 0, 0)
-    RED = (255, 0, 0)
-    BACKGROUND = (78, 150, 142)
+    WHITE: tuple = (255, 255, 255)
+    BLACK: tuple = (0, 0, 0)
+    RED: tuple = (255, 0, 0)
+    BACKGROUND: tuple = (78, 150, 142)
+
+    GOLD: tuple = (255, 174, 49)
+    SILVER: tuple = (181, 216, 213)
+    BRONZE: tuple = (217, 116, 82)
 
     # REGEX
-    USERNAME_REGEX = r"([0-9A-Za-z.-_*$£&])"
+    USERNAME_REGEX: str = r"([0-9A-Za-z.-_*$£&])"

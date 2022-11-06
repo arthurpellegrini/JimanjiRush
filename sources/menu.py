@@ -3,6 +3,8 @@
 import pygame
 from .constants import Constants
 
+from .constants import Constants
+
 
 class Menu:
     def __init__(self, game):
@@ -24,7 +26,7 @@ class Menu:
 class MainMenu(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
-        self.state = 'GAME'
+        self.state = 'PLAY'
         self.startx, self.starty = self.mid_w, self.mid_h + 200
         self.optionsx, self.optionsy = self.mid_w, self.mid_h + 250
         self.creditsx, self.creditsy = self.mid_w, self.mid_h + 300
@@ -37,15 +39,20 @@ class MainMenu(Menu):
             self.check_input()
             self.game.display.fill(Constants.BACKGROUND)
             self.game.draw_text("Jimanji Rush", 80, self.mid_w, self.mid_h)
-            self.game.draw_text("GAME", 40, self.startx, self.starty)
+            self.game.draw_text("PLAY", 40, self.startx, self.starty)
             self.game.draw_text("SCORES", 40, self.optionsx, self.optionsy)
             self.game.draw_text("CREDITS", 40, self.creditsx, self.creditsy)
+
+            self.game.draw_text("Use ARROWS to select a section and press ENTER to valid", 20, Constants.DISPLAY_W / 2,
+                                Constants.DISPLAY_H / 15 * 13)
+            self.game.draw_text('Press ESC to quit the game', 20, Constants.DISPLAY_W / 2,
+                                Constants.DISPLAY_H / 15 * 14)
             self.draw_cursor()
             self.blit_screen()
 
     def move_cursor(self):
         if self.game.DOWN_KEY:
-            if self.state == 'GAME':
+            if self.state == 'PLAY':
                 self.cursor_rect.midtop = (self.optionsx + self.offset, self.optionsy)
                 self.state = 'SCORES'
             elif self.state == 'SCORES':
@@ -53,27 +60,30 @@ class MainMenu(Menu):
                 self.state = 'CREDITS'
             elif self.state == 'CREDITS':
                 self.cursor_rect.midtop = (self.startx + self.offset, self.starty)
-                self.state = 'GAME'
+                self.state = 'PLAY'
         elif self.game.UP_KEY:
-            if self.state == 'GAME':
+            if self.state == 'PLAY':
                 self.cursor_rect.midtop = (self.creditsx + self.offset, self.creditsy)
                 self.state = 'CREDITS'
             elif self.state == 'SCORES':
                 self.cursor_rect.midtop = (self.startx + self.offset, self.starty)
-                self.state = 'GAME'
+                self.state = 'PLAY'
             elif self.state == 'CREDITS':
                 self.cursor_rect.midtop = (self.optionsx + self.offset, self.optionsy)
                 self.state = 'SCORES'
 
     def check_input(self):
         self.move_cursor()
+        if self.game.ESC_KEY:
+            self.game.running = False
+            self.game.current_menu.run_display = False
         if self.game.ENTER_KEY:
-            if self.state == 'GAME':
+            if self.state == 'PLAY':
                 self.game.playing = True
             elif self.state == 'SCORES':
-                self.game.curr_menu = self.game.score_menu
+                self.game.current_menu = self.game.score_menu
             elif self.state == 'CREDITS':
-                self.game.curr_menu = self.game.credits
+                self.game.current_menu = self.game.credits_menu
             self.run_display = False
 
 
@@ -86,30 +96,42 @@ class ScoreMenu(Menu):
         while self.run_display:
             self.check_input()
             self.game.display.fill(Constants.BACKGROUND)
-            self.game.draw_text('SCORES', 80, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 4)
+            self.game.draw_text('SCORES', 80, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 2)
+            self.game.draw_text('Press ESC to return to Main Menu', 20, Constants.DISPLAY_W / 2,
+                                Constants.DISPLAY_H / 15 * 14)
+
             self.display_scores()
             self.blit_screen()
 
     def check_input(self):
         self.game.check_events()
         if self.game.ENTER_KEY or self.game.ESC_KEY:
-            self.game.curr_menu = self.game.main_menu
+            self.game.current_menu = self.game.main_menu
             self.run_display = False
 
     def display_scores(self):
-        height = Constants.DISPLAY_H / 4 + 150
+        height = Constants.DISPLAY_H / 12 * 5
         width = Constants.DISPLAY_W / 4
 
         self.game.draw_text("NAME", 40, width, height)
         self.game.draw_text("SCORE", 40, width * 2, height)
         self.game.draw_text("TIME(sec)", 40, width * 3, height)
 
-        # TODO: changer la couleur des lignes pour les 3 premiers joueurs (OR, ARGENT, BRONZE)
-        for score in self.game.scores.get_best_users():
-            height += 50
-            self.game.draw_text(str(score.name), 40, width, height)
-            self.game.draw_text(str(score.score), 40, width * 2, height)
-            self.game.draw_text(str(score.time), 40, width * 3, height)
+        for i, score in enumerate(self.game.scores.get_best_users()):
+            height += Constants.DISPLAY_H / 12
+            color = Constants.WHITE
+            if i in range(3):
+                if i == 0:
+                    color = Constants.GOLD
+                if i == 1:
+                    color = Constants.SILVER
+                if i == 2:
+                    color = Constants.BRONZE
+                self.game.display.blit(pygame.transform.scale(Constants.ASSETS["MEDAL"][i], (20, 30)),
+                                       (width - 150, height - 20))
+            self.game.draw_text(str(score.name), 25, width, height, color)
+            self.game.draw_text(str(score.score), 25, width * 2, height, color)
+            self.game.draw_text(str(score.time), 25, width * 3, height, color)
 
 
 class CreditsMenu(Menu):
@@ -121,14 +143,16 @@ class CreditsMenu(Menu):
         while self.run_display:
             self.check_input()
             self.game.display.fill(Constants.BACKGROUND)
-            self.game.draw_text('CREDITS', 80, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 4)
-            self.game.draw_text('Arthur PELLEGRINI', 40, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 4 + 150)
-            self.game.draw_text('Clement BRISSARD', 40, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 4 + 200)
-            self.game.draw_text('Osama RAHIM', 40, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 4 + 250)
+            self.game.draw_text('CREDITS', 80, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 3)
+            self.game.draw_text('Arthur PELLEGRINI', 30, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 6)
+            self.game.draw_text('Clement BRISSARD', 30, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 7)
+            self.game.draw_text('Osama RAHIM', 30, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 8)
+            self.game.draw_text('Press ESC to return to Main Menu', 20, Constants.DISPLAY_W / 2,
+                                Constants.DISPLAY_H / 15 * 14)
             self.blit_screen()
 
     def check_input(self):
         self.game.check_events()
         if self.game.ENTER_KEY or self.game.ESC_KEY:
-            self.game.curr_menu = self.game.main_menu
+            self.game.current_menu = self.game.main_menu
             self.run_display = False
