@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-s
 import pygame
-from .constants import Constants
 
 from .constants import Constants
 
@@ -9,7 +8,7 @@ from .constants import Constants
 class Menu:
     def __init__(self, game):
         self.game = game
-        self.mid_w, self.mid_h = Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 4
+        self.width_center, self.heigth_center = Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 4
         self.run_display = True
         self.cursor_rect = pygame.Rect(0, 0, 20, 20)
         self.offset = - 150
@@ -27,10 +26,10 @@ class MainMenu(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
         self.state = 'PLAY'
-        self.startx, self.starty = self.mid_w, self.mid_h + 200
-        self.optionsx, self.optionsy = self.mid_w, self.mid_h + 250
-        self.creditsx, self.creditsy = self.mid_w, self.mid_h + 300
-        self.cursor_rect.midtop = (self.startx + self.offset, self.starty)
+        self.pox_x_play, self.pos_y_play = self.width_center, self.heigth_center + 200
+        self.pos_x_scores, self.pos_y_scores = self.width_center, self.heigth_center + 250
+        self.pos_x_credits, self.pos_y_credits = self.width_center, self.heigth_center + 300
+        self.cursor_rect.midtop = (self.pox_x_play + self.offset, self.pos_y_play)
 
     def display_menu(self):
         self.run_display = True
@@ -38,12 +37,12 @@ class MainMenu(Menu):
             self.game.check_events()
             self.check_input()
             self.game.display.fill(Constants.BACKGROUND)
-            self.game.draw_text("Jimanji Rush", 80, self.mid_w, self.mid_h)
-            self.game.draw_text("PLAY", 40, self.startx, self.starty)
-            self.game.draw_text("SCORES", 40, self.optionsx, self.optionsy)
-            self.game.draw_text("CREDITS", 40, self.creditsx, self.creditsy)
+            self.game.draw_text("Jimanji Rush", 80, self.width_center, self.heigth_center)
+            self.game.draw_text("PLAY", 40, self.pox_x_play, self.pos_y_play)
+            self.game.draw_text("SCORES", 40, self.pos_x_scores, self.pos_y_scores)
+            self.game.draw_text("CREDITS", 40, self.pos_x_credits, self.pos_y_credits)
 
-            self.game.draw_text("Use ARROWS to select a section and press ENTER to valid", 20, Constants.DISPLAY_W / 2,
+            self.game.draw_text("Use ARROWS to select a section and press RETURN to valid", 20, Constants.DISPLAY_W / 2,
                                 Constants.DISPLAY_H / 15 * 13)
             self.game.draw_text('Press ESC to quit the game', 20, Constants.DISPLAY_W / 2,
                                 Constants.DISPLAY_H / 15 * 14)
@@ -51,33 +50,33 @@ class MainMenu(Menu):
             self.blit_screen()
 
     def move_cursor(self):
-        if self.game.DOWN_KEY:
+        if self.game.key_pressed.get(pygame.K_DOWN):
             if self.state == 'PLAY':
-                self.cursor_rect.midtop = (self.optionsx + self.offset, self.optionsy)
+                self.cursor_rect.midtop = (self.pos_x_scores + self.offset, self.pos_y_scores)
                 self.state = 'SCORES'
             elif self.state == 'SCORES':
-                self.cursor_rect.midtop = (self.creditsx + self.offset, self.creditsy)
+                self.cursor_rect.midtop = (self.pos_x_credits + self.offset, self.pos_y_credits)
                 self.state = 'CREDITS'
             elif self.state == 'CREDITS':
-                self.cursor_rect.midtop = (self.startx + self.offset, self.starty)
+                self.cursor_rect.midtop = (self.pox_x_play + self.offset, self.pos_y_play)
                 self.state = 'PLAY'
-        elif self.game.UP_KEY:
+        elif self.game.key_pressed.get(pygame.K_UP):
             if self.state == 'PLAY':
-                self.cursor_rect.midtop = (self.creditsx + self.offset, self.creditsy)
+                self.cursor_rect.midtop = (self.pos_x_credits + self.offset, self.pos_y_credits)
                 self.state = 'CREDITS'
             elif self.state == 'SCORES':
-                self.cursor_rect.midtop = (self.startx + self.offset, self.starty)
+                self.cursor_rect.midtop = (self.pox_x_play + self.offset, self.pos_y_play)
                 self.state = 'PLAY'
             elif self.state == 'CREDITS':
-                self.cursor_rect.midtop = (self.optionsx + self.offset, self.optionsy)
+                self.cursor_rect.midtop = (self.pos_x_scores + self.offset, self.pos_y_scores)
                 self.state = 'SCORES'
 
     def check_input(self):
         self.move_cursor()
-        if self.game.ESC_KEY:
+        if self.game.key_pressed.get(pygame.K_ESCAPE):
             self.game.running = False
             self.game.current_menu.run_display = False
-        if self.game.ENTER_KEY:
+        if self.game.key_pressed.get(pygame.K_RETURN):
             if self.state == 'PLAY':
                 self.game.playing = True
             elif self.state == 'SCORES':
@@ -97,7 +96,7 @@ class ScoreMenu(Menu):
             self.check_input()
             self.game.display.fill(Constants.BACKGROUND)
             self.game.draw_text('SCORES', 80, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 2)
-            self.game.draw_text('Press ESC to return to Main Menu', 20, Constants.DISPLAY_W / 2,
+            self.game.draw_text('Press ESC or RETURN to return to Main Menu', 20, Constants.DISPLAY_W / 2,
                                 Constants.DISPLAY_H / 15 * 14)
 
             self.display_scores()
@@ -105,7 +104,7 @@ class ScoreMenu(Menu):
 
     def check_input(self):
         self.game.check_events()
-        if self.game.ENTER_KEY or self.game.ESC_KEY:
+        if self.game.key_pressed.get(pygame.K_RETURN) or self.game.key_pressed.get(pygame.K_ESCAPE):
             self.game.current_menu = self.game.main_menu
             self.run_display = False
 
@@ -147,12 +146,12 @@ class CreditsMenu(Menu):
             self.game.draw_text('Arthur PELLEGRINI', 30, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 6)
             self.game.draw_text('Clement BRISSARD', 30, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 7)
             self.game.draw_text('Osama RAHIM', 30, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 8)
-            self.game.draw_text('Press ESC to return to Main Menu', 20, Constants.DISPLAY_W / 2,
+            self.game.draw_text('Press ESC or RETURN to return to Main Menu', 20, Constants.DISPLAY_W / 2,
                                 Constants.DISPLAY_H / 15 * 14)
             self.blit_screen()
 
     def check_input(self):
         self.game.check_events()
-        if self.game.ENTER_KEY or self.game.ESC_KEY:
+        if self.game.key_pressed.get(pygame.K_RETURN) or self.game.key_pressed.get(pygame.K_ESCAPE):
             self.game.current_menu = self.game.main_menu
             self.run_display = False

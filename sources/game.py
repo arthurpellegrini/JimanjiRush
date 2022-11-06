@@ -6,9 +6,10 @@ import re
 import pygame
 
 from .constants import Constants
+from .entity import Entity
 from .menu import MainMenu, CreditsMenu, ScoreMenu
+from .player import Player
 from .score import Score, UserScore
-from .constants import Constants
 
 
 class Game:
@@ -20,16 +21,21 @@ class Game:
         self.clock = pygame.time.Clock()
         self.running, self.playing = True, False
 
-        self.LEFT_KEY, self.RIGHT_KEY, self.DOWN_KEY, self.UP_KEY = False, False, False, False
-        self.ENTER_KEY, self.ESC_KEY, self.BACKSPACE, self.SPACE_KEY = False, False, False, False
+        self.key_pressed = {}
         self.unicode = ""
 
         self.iterations = 0
+        self.entity_velocity = 5
 
-        self.STATE = "INPUT"
+        # TODO: REMETTRE QUAND FIN TEST
+        # self.STATE = "INPUT"
+        self.STATE = "GAMEPLAY"
         self.username = ""
         self.username_is_empty, self.username_overflow = False, False
         self.first_frame_game_over = True
+
+        self.player = Player()
+        self.entities = []
 
         self.user_score = 0
         self.user_time = 0
@@ -52,29 +58,21 @@ class Game:
                 self.scores.write_score_file()
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
-                    self.ENTER_KEY = True
-                if event.key == pygame.K_ESCAPE:
-                    self.ESC_KEY = True
-                if event.key == pygame.K_BACKSPACE:
-                    self.BACKSPACE = True
-                if event.key == pygame.K_SPACE:
-                    self.SPACE_KEY = True
-                if event.key == pygame.K_DOWN:
-                    self.DOWN_KEY = True
-                if event.key == pygame.K_UP:
-                    self.UP_KEY = True
-                if event.key == pygame.K_LEFT:
-                    self.DOWN_KEY = True
-                if event.key == pygame.K_RIGHT:
-                    self.UP_KEY = True
+                self.key_pressed[event.key] = True
+
                 if re.match(Constants.USERNAME_REGEX, event.unicode):
                     self.unicode = event.unicode
 
-    def reset_keys(self):
-        self.LEFT_KEY, self.RIGHT_KEY, self.DOWN_KEY, self.UP_KEY = False, False, False, False
-        self.ENTER_KEY, self.ESC_KEY, self.BACKSPACE, self.SPACE_KEY = False, False, False, False
-        self.unicode = ""
+            elif event.type == pygame.KEYUP:
+                self.key_pressed[event.key] = False
+
+    def reset_keys(self, key=None):
+        if key is None:
+            for key_code in list(self.key_pressed.keys()):
+                self.key_pressed[key_code] = False
+            self.unicode = ""
+        else:
+            self.key_pressed[key] = False
 
     def draw_text(self, text, size, x, y, color=Constants.WHITE):
         font = pygame.font.Font(Constants.ASSETS["FONT"], size)
@@ -85,6 +83,7 @@ class Game:
 
     def game_loop(self):
         while self.playing:
+            self.check_events()
             self.input_name()
             self.gameplay()
             self.game_over()
@@ -95,20 +94,19 @@ class Game:
 
     def input_name(self):
         if self.STATE == "INPUT":
-            self.check_events()
             self.display.fill(Constants.BACKGROUND)
 
-            if self.ESC_KEY:
+            if self.key_pressed.get(pygame.K_ESCAPE):
                 self.username = ""
                 self.playing = False
 
-            if self.SPACE_KEY:
+            if self.key_pressed.get(pygame.K_RETURN):
                 if self.username == "":
                     self.username_is_empty = True
                 else:
                     self.STATE = "GAMEPLAY"
 
-            if self.BACKSPACE:
+            if self.key_pressed.get(pygame.K_BACKSPACE):
                 self.username_overflow = False
                 self.username = self.username[:-1]
 
@@ -135,55 +133,83 @@ class Game:
                 self.draw_text("/!\ Username can't exceed 15 characters", 20, Constants.DISPLAY_W / 2,
                                Constants.DISPLAY_H / 3 * 2, Constants.RED)
 
-            self.draw_text("Press SPACE to play", 20, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 13)
+            self.draw_text("Press RETURN to play", 20, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 13)
             self.draw_text('Press ESC to return to Main Menu', 20, Constants.DISPLAY_W / 2,
                            Constants.DISPLAY_H / 15 * 14)
             self.reset_keys()
 
     def gameplay(self):
         if self.STATE == "GAMEPLAY":
-            self.check_events()
             self.first_frame_game_over = True
-            if self.ESC_KEY:
+            if self.key_pressed.get(pygame.K_ESCAPE):
                 self.playing = False
                 self.STATE = "INPUT"
 
-            if self.SPACE_KEY:
+            if self.key_pressed.get(pygame.K_SPACE):
                 self.STATE = "GAME_OVER"
 
             self.display.blit(pygame.transform.scale(Constants.ASSETS["BACKGROUND"][0],
                                                      (Constants.DISPLAY_W, Constants.DISPLAY_H)), (0, 0))
+            self.generate_object()
+            for entity in self.entities:
+                if entity.check_if_visible():
+                    entity.fall()
+                    if entity.rect.colliderect(self.player.rect):
+                        self.entities.remove(entity)
+                else:
+                    self.entities.remove(entity)
+                self.display.blit(entity.image, entity.rect)
+            self.player.move(self.key_pressed)
 
-            self.draw_text('Thanks for Playing', 20, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 2)
-            self.draw_text('Press ESC to return to Main Menu', 20, Constants.DISPLAY_W / 2,
-                           Constants.DISPLAY_H / 15 * 14)
-            self.reset_keys()
+            self.display.blit(self.player.image, self.player.rect)
+            self.reset_keys(key=pygame.K_ESCAPE)
+
+    def generate_object(self):
+        if len(self.entities) < 10 and self.iterations % 10 == 0:
+            nb = random.randint(0, 100)
+            if nb in range(0, 35):  # CannonBall
+                self.entities.append(Entity("CANNONBALL", self.entity_velocity))
+            elif nb in range(35, 40):  # Heart
+                self.entities.append(Entity("HEART", self.entity_velocity))
+            elif nb in range(40, 45):  # Egg
+                self.entities.append(Entity("EGG", self.entity_velocity))
+            elif nb in range(45, 50):  # Star
+                self.entities.append(Entity("STAR", self.entity_velocity))
+            elif nb in range(50, 80):  # Coin
+                self.entities.append(Entity("COIN", self.entity_velocity))
+            elif nb in range(80, 89):  # Blue Gem
+                self.entities.append(Entity("BLUE_GEM", self.entity_velocity))
+            elif nb in range(89, 95):  # Green Gem
+                self.entities.append(Entity("GREEN_GEM", self.entity_velocity))
+            elif nb in range(95, 100):  # Ruby
+                self.entities.append(Entity("RUBY", self.entity_velocity))
 
     def game_over(self):
         if self.STATE == "GAME_OVER":
-            self.check_events()
-
             if self.first_frame_game_over:
+                self.player.reset_position()
                 self.user_time = random.randint(150, 9999)
                 self.user_score = random.randint(600, 99999999)
 
                 self.scores.add_user(UserScore(self.username, self.user_score, self.user_time))
                 self.first_frame_game_over = False
 
-            if self.ESC_KEY:
+            if self.key_pressed.get(pygame.K_ESCAPE):
                 self.playing = False
                 self.STATE = "INPUT"
 
-            if self.SPACE_KEY:
+            if self.key_pressed.get(pygame.K_RETURN):
                 self.STATE = "GAMEPLAY"
 
             skull = pygame.transform.scale(
-                Constants.ASSETS["SKULL"][self.iterations // 8 % len(Constants.ASSETS["SKULL"])], (186, 225))
+                Constants.ASSETS["SKULL"][self.iterations // 10 % len(Constants.ASSETS["SKULL"])], (186, 225))
             skull_rect = skull.get_rect()
-            skull_rect.center = (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 3)
+            skull_rect.center = (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 5 * 2)
             self.display.fill(Constants.BLACK)
             self.display.blit(skull, skull_rect)
-            self.draw_text('Press SPACE to Replay', 20, Constants.DISPLAY_W / 2,
+
+            self.draw_text('Game Over', 40, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 5 * 3)
+            self.draw_text('Press RETURN to Replay', 20, Constants.DISPLAY_W / 2,
                            Constants.DISPLAY_H / 15 * 13)
             self.draw_text('Press ESC to return to Main Menu', 20, Constants.DISPLAY_W / 2,
                            Constants.DISPLAY_H / 15 * 14)
