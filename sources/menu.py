@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-s
 import pygame
+from .constants import Constants
 
 from .constants import Constants
 
@@ -98,6 +99,7 @@ class ScoreMenu(Menu):
             self.game.draw_text('SCORES', 80, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 2)
             self.game.draw_text('Press ESC to return to Main Menu', 20, Constants.DISPLAY_W / 2,
                                 Constants.DISPLAY_H / 15 * 14)
+
             self.display_scores()
             self.blit_screen()
 

@@ -8,6 +8,7 @@ import pygame
 from .constants import Constants
 from .menu import MainMenu, CreditsMenu, ScoreMenu
 from .score import Score, UserScore
+from .constants import Constants
 
 
 class Game:
@@ -158,7 +159,6 @@ class Game:
                            Constants.DISPLAY_H / 15 * 14)
             self.reset_keys()
 
-    # TODO: fonction game_over qui sauvegarde le score du joueur en cours
     def game_over(self):
         if self.STATE == "GAME_OVER":
             self.check_events()
