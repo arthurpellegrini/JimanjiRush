@@ -51,5 +51,5 @@ if __name__ == "__main__":
     game = Game()
 
     while game.running:
-        game.current_menu.display_menu()
+        game.current_menu.display()
         game.game_loop()
