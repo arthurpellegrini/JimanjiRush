@@ -7,8 +7,9 @@ from .sprite import Sprite
 
 
 class Entity(Sprite):
-    def __init__(self, name: str, velocity: int):
+    def __init__(self, name: str, velocity: int, column: int):
         """
+
         :param name:
         """
         super().__init__(name=name)
@@ -16,13 +17,14 @@ class Entity(Sprite):
         self.velocity = velocity
         self.rect = self.image.get_rect()
         self.margin = 10
-        self.rect.center = (Constants.DISPLAY_W / 10 * random.randint(1, 9) - self.margin, self.margin)
+        self.ground_heigth = 100
+        self.rect.center = (Constants.DISPLAY_W / 10 * column - self.margin, self.margin)
 
     def fall(self):
         self.animate()
         self.rect.y += self.velocity
 
     def check_if_visible(self) -> bool:
-        if self.rect.y >= Constants.DISPLAY_H - self.margin:
+        if self.rect.y >= Constants.DISPLAY_H - self.margin - self.ground_heigth:
             return False
         return True

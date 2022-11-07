@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-s
 import pygame
+import threading
+import time
 
 from .constants import Constants
 from .sprite import Sprite
@@ -10,6 +12,7 @@ class Player(Sprite):
     """
     Définie toutes les actions que peut effectuer le joueur (courir de droite à gauche).
     """
+
     def __init__(self):
         """
         Le constructeur de la classe Player.
@@ -20,6 +23,7 @@ class Player(Sprite):
         self.rect = self.image.get_rect()
         self.reset_position()
         self.margin = 10
+        self.egg, self.star = False, False
 
     def reset_position(self):
         """
@@ -70,11 +74,27 @@ class Player(Sprite):
         Ajoute 5 à la variable velocity quand le joueur récolte une étoile.
         :return: None.
         """
+        self.star = True
         self.velocity += 5
+
+        def wait_and_restore():
+            time.sleep(5)
+            self.velocity -= 5
+            self.star = False
+
+        threading.Thread(target=wait_and_restore).start()
 
     def decrease_velocity(self):
         """
         Baisse de 5 la variable quand le joueur se prend un œuf sur la tête.
         :return:
         """
+        self.egg = True
         self.velocity -= 5
+
+        def wait_and_restore():
+            time.sleep(5)
+            self.velocity += 5
+            self.egg = False
+
+        threading.Thread(target=wait_and_restore).start()

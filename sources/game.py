@@ -35,6 +35,7 @@ class Game:
         self.first_frame_game_over = True
 
         self.player = Player()
+        self.hearts = 3
         self.entities = []
 
         self.user_score = 0
@@ -145,7 +146,7 @@ class Game:
                 self.playing = False
                 self.STATE = "INPUT"
 
-            if self.key_pressed.get(pygame.K_SPACE):
+            if self.hearts == 0:
                 self.STATE = "GAME_OVER"
 
             self.display.blit(pygame.transform.scale(Constants.ASSETS["BACKGROUND"][0],
@@ -153,36 +154,62 @@ class Game:
             self.generate_object()
             for entity in self.entities:
                 if entity.check_if_visible():
-                    entity.fall()
                     if entity.rect.colliderect(self.player.rect):
                         self.entities.remove(entity)
+                        if entity.name == "CANNONBALL":
+                            if self.hearts > 0:
+                                self.hearts -= 1
+                        elif entity.name == "HEART":
+                            if self.hearts < 3:
+                                self.hearts += 1
+                        elif entity.name == "EGG":
+                            if not self.player.egg and not self.player.star:
+                                self.player.decrease_velocity()
+                            else:
+                                self.user_score -= 100
+                        elif entity.name == "STAR":
+                            if not self.player.star and not self.player.egg:
+                                self.player.increase_velocity()
+                            else:
+                                self.user_score += 100
+                        elif entity.name == "COIN":
+                            self.user_score += 500
+                        elif entity.name == "BLUE_GEM":
+                            self.user_score += 1000
+                        elif entity.name == "GREEN_GEM":
+                            self.user_score += 4000
+                        elif entity.name == "RUBY":
+                            self.user_score += 8000
+                    entity.fall()
                 else:
                     self.entities.remove(entity)
                 self.display.blit(entity.image, entity.rect)
             self.player.move(self.key_pressed)
 
             self.display.blit(self.player.image, self.player.rect)
+            self.draw_text("Score: " + str(self.user_score), 30, Constants.DISPLAY_W / 4, Constants.DISPLAY_H / 15)
             self.reset_keys(key=pygame.K_ESCAPE)
 
     def generate_object(self):
-        if len(self.entities) < 10 and self.iterations % 10 == 0:
+        if len(self.entities) < 10:
+            column = self.iterations % 8 + 1
             nb = random.randint(0, 100)
             if nb in range(0, 35):  # CannonBall
-                self.entities.append(Entity("CANNONBALL", self.entity_velocity))
+                self.entities.append(Entity("CANNONBALL", self.entity_velocity, column))
             elif nb in range(35, 40):  # Heart
-                self.entities.append(Entity("HEART", self.entity_velocity))
+                self.entities.append(Entity("HEART", self.entity_velocity, column))
             elif nb in range(40, 45):  # Egg
-                self.entities.append(Entity("EGG", self.entity_velocity))
+                self.entities.append(Entity("EGG", self.entity_velocity, column))
             elif nb in range(45, 50):  # Star
-                self.entities.append(Entity("STAR", self.entity_velocity))
+                self.entities.append(Entity("STAR", self.entity_velocity, column))
             elif nb in range(50, 80):  # Coin
-                self.entities.append(Entity("COIN", self.entity_velocity))
+                self.entities.append(Entity("COIN", self.entity_velocity, column))
             elif nb in range(80, 89):  # Blue Gem
-                self.entities.append(Entity("BLUE_GEM", self.entity_velocity))
+                self.entities.append(Entity("BLUE_GEM", self.entity_velocity, column))
             elif nb in range(89, 95):  # Green Gem
-                self.entities.append(Entity("GREEN_GEM", self.entity_velocity))
+                self.entities.append(Entity("GREEN_GEM", self.entity_velocity, column))
             elif nb in range(95, 100):  # Ruby
-                self.entities.append(Entity("RUBY", self.entity_velocity))
+                self.entities.append(Entity("RUBY", self.entity_velocity, column))
 
     def game_over(self):
         if self.STATE == "GAME_OVER":
