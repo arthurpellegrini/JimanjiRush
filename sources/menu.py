@@ -9,6 +9,7 @@ class Menu:
     def __init__(self, game):
         self.game = game
         self.width_center, self.heigth_center = Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 4
+        # TODO: MODIFIER LE BACKGROUND POUR RENDRE LE MENU PLUS ATTRAYANT
         self.background = pygame.transform.scale(Constants.ASSETS["BACKGROUND"][1],
                                                  (Constants.DISPLAY_W, Constants.DISPLAY_H))
         self.run_display = True
@@ -68,15 +69,14 @@ class MainMenu(Menu):
         self.game.draw_text("Jimanji Rush", 80, self.width_center, self.heigth_center)
         self.game.display.blit(pygame.transform.scale(Constants.ASSETS["ICON"], (90, 90)),
                                (self.width_center - 55, self.heigth_center - 110))
+        self.draw_cursor()
         self.game.draw_text("PLAY", 40, self.pox_x_play, self.pos_y_play)
         self.game.draw_text("SCORES", 40, self.pos_x_scores, self.pos_y_scores)
         self.game.draw_text("CREDITS", 40, self.pos_x_credits, self.pos_y_credits)
-
         self.game.draw_text("Use ARROWS to select a section and press RETURN to valid", 20, Constants.DISPLAY_W / 2,
                             Constants.DISPLAY_H / 15 * 13)
         self.game.draw_text('Press ESC to quit the game', 20, Constants.DISPLAY_W / 2,
                             Constants.DISPLAY_H / 15 * 14)
-        self.draw_cursor()
 
     def draw_cursor(self):
         self.game.draw_text('>', 40, self.cursor_rect.x, self.cursor_rect.y)
@@ -107,36 +107,35 @@ class MainMenu(Menu):
 class ScoreMenu(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
+        self.medals = [pygame.transform.scale(medal, (20, 30)) for medal in Constants.ASSETS["MEDAL"]]
+        self.width, self.height = Constants.DISPLAY_W / 4, Constants.DISPLAY_H / 12 * 5
+        self.font_color = Constants.WHITE
 
     def display_content(self):
         self.game.draw_text('SCORES', 80, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 2)
+        self.display_scores()
         self.game.draw_text('Press ESC or RETURN to return to Main Menu', 20,
                             Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 14)
-        self.display_scores()
 
     def display_scores(self):
-        height = Constants.DISPLAY_H / 12 * 5
-        width = Constants.DISPLAY_W / 4
-
-        self.game.draw_text("NAME", 40, width, height)
-        self.game.draw_text("SCORE", 40, width * 2, height)
-        self.game.draw_text("TIME(sec)", 40, width * 3, height)
+        self.game.draw_text("NAME", 40, self.width, self.height)
+        self.game.draw_text("SCORE", 40, self.width * 2, self.height)
+        self.game.draw_text("TIME(sec)", 40, self.width * 3, self.height)
 
         for i, score in enumerate(self.game.scores.get_best_users()):
-            height += Constants.DISPLAY_H / 12
-            color = Constants.WHITE
             if i in range(3):
+                self.game.display.blit(self.medals[i], (self.width - 150, self.height - 20))
                 if i == 0:
-                    color = Constants.GOLD
-                if i == 1:
-                    color = Constants.SILVER
-                if i == 2:
-                    color = Constants.BRONZE
-                self.game.display.blit(pygame.transform.scale(Constants.ASSETS["MEDAL"][i], (20, 30)),
-                                       (width - 150, height - 20))
-            self.game.draw_text(str(score.name), 25, width, height, color)
-            self.game.draw_text(str(score.score), 25, width * 2, height, color)
-            self.game.draw_text(str(score.time), 25, width * 3, height, color)
+                    self.font_color = Constants.GOLD
+                elif i == 1:
+                    self.font_color = Constants.SILVER
+                elif i == 2:
+                    self.font_color = Constants.BRONZE
+            else:
+                self.font_color = Constants.WHITE
+            self.game.draw_text(str(score.name), 25, self.width, self.height, self.font_color)
+            self.game.draw_text(str(score.score), 25, self.width * 2, self.height, self.font_color)
+            self.game.draw_text(str(score.time), 25, self.width * 3, self.height, self.font_color)
 
 
 class CreditsMenu(Menu):
