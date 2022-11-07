@@ -7,7 +7,7 @@ from .sprite import Sprite
 
 
 class Entity(Sprite):
-    def __init__(self, name: str, velocity: int, column: int):
+    def __init__(self, name: str, velocity: int):
         """
 
         :param name:
@@ -16,9 +16,11 @@ class Entity(Sprite):
         self.name = name
         self.velocity = velocity
         self.rect = self.image.get_rect()
-        self.margin = 10
+        self.margin = 20
         self.ground_heigth = 100
-        self.rect.center = (Constants.DISPLAY_W / 10 * column - self.margin, self.margin)
+
+        self.rect.x = Constants.DISPLAY_W // 10 * random.randint(1, 10) - self.margin - self.rect.width
+        self.rect.y = - random.randint(0, Constants.DISPLAY_H // 10)
 
     def fall(self):
         self.animate()

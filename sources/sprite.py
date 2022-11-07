@@ -9,7 +9,7 @@ class Sprite(pygame.sprite.Sprite):
     def __init__(self, name: str):
         super().__init__()
         self.current_image = 0
-        self.images = Constants.ASSETS[name]
+        self.images = [f.convert_alpha() for f in Constants.ASSETS[name]]
         self.image = self.images[0]
         self.rate = 10  # vitesse du changement d'image dans l'animation
 

@@ -25,6 +25,7 @@ class Player(Sprite):
         self.margin = 10
         self.egg, self.star = False, False
 
+# TODO: Si changement de direction alors transform.flip(image, true, false)
     def reset_position(self):
         """
         Permet d'initialiser à partir des coordonnées la position de départ du joueur.
@@ -64,10 +65,10 @@ class Player(Sprite):
         :return: None.
         """
         self.animate()
-        if self.rect.x + self.velocity < Constants.DISPLAY_W - self.margin:
+        if self.rect.x + self.velocity < Constants.DISPLAY_W - self.margin - self.rect.width:
             self.rect.x += self.velocity
         else:
-            self.rect.x = Constants.DISPLAY_W - self.margin
+            self.rect.x = Constants.DISPLAY_W - self.margin - self.rect.width
 
     def increase_velocity(self):
         """
