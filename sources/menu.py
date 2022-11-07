@@ -37,7 +37,12 @@ class MainMenu(Menu):
             self.game.check_events()
             self.check_input()
             self.game.display.fill(Constants.BACKGROUND)
+            self.game.display.blit(
+                pygame.transform.scale(Constants.ASSETS["BACKGROUND"][1], (Constants.DISPLAY_W, Constants.DISPLAY_H)),
+                (0, 0))
             self.game.draw_text("Jimanji Rush", 80, self.width_center, self.heigth_center)
+            self.game.display.blit(pygame.transform.scale(Constants.ASSETS["ICON"], (90, 90)),
+                                   (self.width_center - 55, self.heigth_center - 110))
             self.game.draw_text("PLAY", 40, self.pox_x_play, self.pos_y_play)
             self.game.draw_text("SCORES", 40, self.pos_x_scores, self.pos_y_scores)
             self.game.draw_text("CREDITS", 40, self.pos_x_credits, self.pos_y_credits)
@@ -95,6 +100,9 @@ class ScoreMenu(Menu):
         while self.run_display:
             self.check_input()
             self.game.display.fill(Constants.BACKGROUND)
+            self.game.display.blit(
+                pygame.transform.scale(Constants.ASSETS["BACKGROUND"][1], (Constants.DISPLAY_W, Constants.DISPLAY_H)),
+                (0, 0))
             self.game.draw_text('SCORES', 80, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 2)
             self.game.draw_text('Press ESC or RETURN to return to Main Menu', 20, Constants.DISPLAY_W / 2,
                                 Constants.DISPLAY_H / 15 * 14)
@@ -142,6 +150,9 @@ class CreditsMenu(Menu):
         while self.run_display:
             self.check_input()
             self.game.display.fill(Constants.BACKGROUND)
+            self.game.display.blit(
+                pygame.transform.scale(Constants.ASSETS["BACKGROUND"][1], (Constants.DISPLAY_W, Constants.DISPLAY_H)),
+                (0, 0))
             self.game.draw_text('CREDITS', 80, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 3)
             self.game.draw_text('Arthur PELLEGRINI', 30, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 6)
             self.game.draw_text('Clement BRISSARD', 30, Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 7)
