@@ -21,3 +21,6 @@ class Constants:
 
     # REGEX
     USERNAME_REGEX: str = r"([0-9A-Za-z.-_*$£&])"
+
+    #
+    VELOCITY: int = 1

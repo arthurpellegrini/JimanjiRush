@@ -34,7 +34,11 @@ def get_assets() -> dict:
                     image = pygame.transform.scale(image, (21 * 6, 33 * 6))
                 elif parent_elem_dir_name == "IDDLE":
                     image = pygame.transform.scale(image, (17 * 6, 31 * 6))
-                elif parent_elem_dir_name not in ["BACKGROUND", "MEDAL"]:
+                elif parent_elem_dir_name == "SKULL":
+                    image = pygame.transform.scale(image, (62 * 3, 75 * 3))
+                elif parent_elem_dir_name == "BACKGROUND":
+                    image = pygame.transform.scale(image, (Constants.DISPLAY_W, Constants.DISPLAY_H))
+                elif parent_elem_dir_name != "MEDAL":
                     image = pygame.transform.scale(image, (36 * 1.5, 45 * 1.5))
                 assets[parent_elem_dir_name].append(image)
 

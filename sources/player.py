@@ -20,10 +20,11 @@ class Player(Sprite):
         super().__init__("PLAYER")
         self.rate = 4
         self.velocity = 10  # vitesse de l'utilisateur
-        self.rect = self.image.get_rect()
         self.reset_position()
         self.margin = 10
+        self.left, self.right = False, False
         self.egg, self.star = False, False
+        self.hearts = 3
 
 # TODO: Si changement de direction alors transform.flip(image, true, false)
     def reset_position(self):
@@ -83,7 +84,7 @@ class Player(Sprite):
             self.velocity -= 5
             self.star = False
 
-        threading.Thread(target=wait_and_restore).start()
+        threading.Thread(target=wait_and_restore, daemon=True).start()
 
     def decrease_velocity(self):
         """
@@ -98,4 +99,4 @@ class Player(Sprite):
             self.velocity += 5
             self.egg = False
 
-        threading.Thread(target=wait_and_restore).start()
+        threading.Thread(target=wait_and_restore, daemon=True).start()
