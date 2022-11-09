@@ -28,9 +28,6 @@ class Sprite(pygame.sprite.Sprite):
             self.image = pygame.transform.flip(self.image, True, False)
         self.current_image += 1
 
-    def update(self):
-        self.animate()
-
     def check_if_visible(self) -> bool:
         if self.rect.y >= Constants.DISPLAY_H - self.ground_height:
             return False
@@ -47,11 +44,13 @@ class Player(Sprite):
         self.reset_position()
         self.left, self.right = False, False
         self.egg, self.star = False, False
+        self.last_velocity = 0
 
     def reset_position(self):
         self.rect.center = (Constants.DISPLAY_W / 9, Constants.DISPLAY_H - self.ground_height)
 
     def move(self, key_pressed: dict):
+        self.velocity = Constants.VELOCITY
         if key_pressed.get(pygame.K_LEFT):
             self.left, self.right = True, False
             self.move_left()
@@ -80,22 +79,24 @@ class Player(Sprite):
 
     def increase_velocity(self):
         self.star = True
-        self.velocity += 5
+        self.last_velocity = Constants.VELOCITY * 0.5
+        self.velocity += self.last_velocity
 
         def wait_and_restore():
-            time.sleep(5)
-            self.velocity -= 5
+            time.sleep(1)
+            self.velocity -= self.last_velocity
             self.star = False
 
         threading.Thread(target=wait_and_restore, daemon=True).start()
 
     def decrease_velocity(self):
         self.egg = True
-        self.velocity -= 5
+        self.last_velocity = Constants.VELOCITY * 0.5
+        self.velocity -= self.last_velocity
 
         def wait_and_restore():
-            time.sleep(5)
-            self.velocity += 5
+            time.sleep(1)
+            self.velocity += self.last_velocity
             self.egg = False
 
         threading.Thread(target=wait_and_restore, daemon=True).start()
@@ -134,11 +135,11 @@ class User(Player):
 class Collectable(Sprite):
     def __init__(self, name: str):
         super().__init__(name)
-        self.velocity //= 2
         self.rect.x = Constants.DISPLAY_W // 9 * random.randint(1, 9) - self.margin - self.rect.width
         self.rect.y = - random.randint(0, Constants.DISPLAY_H // 9)
 
     def fall(self):
+        self.velocity = Constants.VELOCITY // 2
         self.rect.y += self.velocity
 
     def collide(self, user: User):
@@ -160,11 +161,11 @@ class Collectable(Sprite):
 class CannonBall(Sprite):
     def __init__(self):
         super().__init__("CANNONBALL")
-        self.velocity //= 2
         self.rect.x = Constants.DISPLAY_W // 9 * random.randint(1, 9) - self.margin - self.rect.width
         self.rect.y = - random.randint(0, Constants.DISPLAY_H // 9)
 
     def fall(self):
+        self.velocity = Constants.VELOCITY // 2
         self.rect.y += self.velocity
 
     def collide(self, user: User):
@@ -177,11 +178,11 @@ class CannonBall(Sprite):
 class Heart(Sprite):
     def __init__(self):
         super().__init__("HEART")
-        self.velocity //= 2
         self.rect.x = Constants.DISPLAY_W // 9 * random.randint(1, 9) - self.margin - self.rect.width
         self.rect.y = - random.randint(0, Constants.DISPLAY_H // 9)
 
     def fall(self):
+        self.velocity = Constants.VELOCITY // 2
         self.rect.y += self.velocity
 
     def collide(self, user: User):
@@ -194,11 +195,11 @@ class Heart(Sprite):
 class Egg(Sprite):
     def __init__(self):
         super().__init__("EGG")
-        self.velocity //= 2
         self.rect.x = Constants.DISPLAY_W // 9 * random.randint(1, 9) - self.margin - self.rect.width
         self.rect.y = - random.randint(0, Constants.DISPLAY_H // 9)
 
     def fall(self):
+        self.velocity = Constants.VELOCITY // 2
         self.rect.y += self.velocity
 
     def collide(self, user: User):
@@ -214,11 +215,11 @@ class Egg(Sprite):
 class Star(Sprite):
     def __init__(self):
         super().__init__("STAR")
-        self.velocity //= 2
         self.rect.x = Constants.DISPLAY_W // 9 * random.randint(1, 9) - self.margin - self.rect.width
         self.rect.y = - random.randint(0, Constants.DISPLAY_H // 9)
 
     def fall(self):
+        self.velocity = Constants.VELOCITY // 2
         self.rect.y += self.velocity
 
     def collide(self, user: User):
