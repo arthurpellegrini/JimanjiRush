@@ -19,7 +19,7 @@ class Sprite(pygame.sprite.Sprite):
         :param name: la clef correspond au sprite dans le dictionnaire des assets.
         """
         super().__init__()
-        self.username = name
+        self.name = name
         self.current_image = 0
         self.images = [f.convert_alpha() for f in Constants.ASSETS[name]]
         self.image = self.images[0]
@@ -38,6 +38,13 @@ class Sprite(pygame.sprite.Sprite):
         if reverse:
             self.image = pygame.transform.flip(self.image, True, False)
         self.current_image += 1
+
+    def fall(self) -> None:
+        """
+        Cette méthode permet de modifier la position du sprite afin de donner l'impression que celui-ci tombe.
+        """
+        self.velocity = Constants.VELOCITY // 2
+        self.rect.y += self.velocity
 
     def check_if_visible(self) -> bool:
         """
@@ -160,6 +167,7 @@ class User(Player):
         Le constructeur de la classe User.
         """
         super().__init__()
+        self.available = True
         self.username = ""
         self.score = 0
         self.start_time = 0
@@ -201,13 +209,6 @@ class Collectable(Sprite):
         self.rect.x = Constants.DISPLAY_W // 9 * random.randint(1, 9) - self.margin - self.rect.width
         self.rect.y = - random.randint(0, Constants.DISPLAY_H // 9)
 
-    def fall(self) -> None:
-        """
-        Cette méthode permet de modifier la position du sprite afin de donner l'impression que celui-ci tombe.
-        """
-        self.velocity = Constants.VELOCITY // 2
-        self.rect.y += self.velocity
-
     def collide(self, user: User) -> None:
         """
         Cette méthode permet de détecter la collision du sprite avec le joueur et d'effectuer les actions
@@ -216,16 +217,16 @@ class Collectable(Sprite):
         """
         if self.rect.colliderect(user.rect):
             Constants.SPRITES.remove(self)
-            if self.username == "COIN":
+            if self.name == "COIN":
                 user.score += Constants.SCORE_VALUE * 5
 
-            elif self.username == "BLUE_GEM":
+            elif self.name == "BLUE_GEM":
                 user.score += Constants.SCORE_VALUE * 10
 
-            elif self.username == "GREEN_GEM":
+            elif self.name == "GREEN_GEM":
                 user.score += Constants.SCORE_VALUE * 40
 
-            elif self.username == "RUBY":
+            elif self.name == "RUBY":
                 user.score += Constants.SCORE_VALUE * 80
 
 
@@ -242,13 +243,6 @@ class CannonBall(Sprite):
         self.rect.x = Constants.DISPLAY_W // 9 * random.randint(1, 9) - self.margin - self.rect.width
         self.rect.y = - random.randint(0, Constants.DISPLAY_H // 9)
 
-    def fall(self) -> None:
-        """
-        Cette méthode permet de modifier la position du sprite afin de donner l'impression que celui-ci tombe.
-        """
-        self.velocity = Constants.VELOCITY // 2
-        self.rect.y += self.velocity
-
     def collide(self, user: User) -> None:
         """
         Cette méthode permet de détecter la collision du sprite avec le joueur et d'effectuer les actions
@@ -257,8 +251,19 @@ class CannonBall(Sprite):
         """
         if self.rect.colliderect(user.rect):
             Constants.SPRITES.remove(self)
-            if user.hearts > 0:
+            if user.hearts > 0 and user.available:
+                user.available = False
+
+                def wait_and_restore():
+                    """
+                    Cette fonction permet d'attendre 1s puis de remettre la variable heart du joueur disponible à la
+                    modification.
+                    """
+                    time.sleep(1)
+                    user.available = True
+
                 user.hearts -= 1
+                threading.Thread(target=wait_and_restore, daemon=True).start()
 
 
 class Heart(Sprite):
@@ -273,13 +278,6 @@ class Heart(Sprite):
         super().__init__("HEART")
         self.rect.x = Constants.DISPLAY_W // 9 * random.randint(1, 9) - self.margin - self.rect.width
         self.rect.y = - random.randint(0, Constants.DISPLAY_H // 9)
-
-    def fall(self) -> None:
-        """
-        Cette méthode permet de modifier la position du sprite afin de donner l'impression que celui-ci tombe.
-        """
-        self.velocity = Constants.VELOCITY // 2
-        self.rect.y += self.velocity
 
     def collide(self, user: User) -> None:
         """
@@ -305,13 +303,6 @@ class Egg(Sprite):
         super().__init__("EGG")
         self.rect.x = Constants.DISPLAY_W // 9 * random.randint(1, 9) - self.margin - self.rect.width
         self.rect.y = - random.randint(0, Constants.DISPLAY_H // 9)
-
-    def fall(self) -> None:
-        """
-        Cette méthode permet de modifier la position du sprite afin de donner l'impression que celui-ci tombe.
-        """
-        self.velocity = Constants.VELOCITY // 2
-        self.rect.y += self.velocity
 
     def collide(self, user: User) -> None:
         """
@@ -341,13 +332,6 @@ class Star(Sprite):
         super().__init__("STAR")
         self.rect.x = Constants.DISPLAY_W // 9 * random.randint(1, 9) - self.margin - self.rect.width
         self.rect.y = - random.randint(0, Constants.DISPLAY_H // 9)
-
-    def fall(self) -> None:
-        """
-        Cette méthode permet de modifier la position du sprite afin de donner l'impression que celui-ci tombe.
-        """
-        self.velocity = Constants.VELOCITY // 2
-        self.rect.y += self.velocity
 
     def collide(self, user: User) -> None:
         """

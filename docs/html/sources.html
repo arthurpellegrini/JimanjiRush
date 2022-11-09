@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sources package &mdash; Documentation Jimanji Rush 1.0.0</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Jimanji Rush
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">sources package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-sources.constants">sources.constants module</a></li>
+<li><a class="reference internal" href="#module-sources.game">sources.game module</a></li>
+<li><a class="reference internal" href="#module-sources.menu">sources.menu module</a></li>
+<li><a class="reference internal" href="#module-sources.score">sources.score module</a></li>
+<li><a class="reference internal" href="#module-sources.sprite">sources.sprite module</a></li>
+<li><a class="reference internal" href="#module-sources">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Jimanji Rush</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>sources package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/sources.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sources-package">
+<h1>sources package<a class="headerlink" href="#sources-package" title="Lien permanent vers ce titre"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Lien permanent vers ce titre"></a></h2>
+</section>
+<section id="module-sources.constants">
+<span id="sources-constants-module"></span><h2>sources.constants module<a class="headerlink" href="#module-sources.constants" title="Lien permanent vers ce titre"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.constants.Constants">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.constants.</span></span><span class="sig-name descname"><span class="pre">Constants</span></span><a class="headerlink" href="#sources.constants.Constants" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Cette classe contient des variables globales pour tout le projet.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.ASSETS">
+<span class="sig-name descname"><span class="pre">ASSETS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#sources.constants.Constants.ASSETS" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.BACKGROUND">
+<span class="sig-name descname"><span class="pre">BACKGROUND</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(78,</span> <span class="pre">150,</span> <span class="pre">142)</span></em><a class="headerlink" href="#sources.constants.Constants.BACKGROUND" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.BLACK">
+<span class="sig-name descname"><span class="pre">BLACK</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></em><a class="headerlink" href="#sources.constants.Constants.BLACK" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.BRONZE">
+<span class="sig-name descname"><span class="pre">BRONZE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(217,</span> <span class="pre">116,</span> <span class="pre">82)</span></em><a class="headerlink" href="#sources.constants.Constants.BRONZE" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.DISPLAY_H">
+<span class="sig-name descname"><span class="pre">DISPLAY_H</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">720</span></em><a class="headerlink" href="#sources.constants.Constants.DISPLAY_H" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.DISPLAY_W">
+<span class="sig-name descname"><span class="pre">DISPLAY_W</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1280</span></em><a class="headerlink" href="#sources.constants.Constants.DISPLAY_W" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.GOLD">
+<span class="sig-name descname"><span class="pre">GOLD</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(255,</span> <span class="pre">174,</span> <span class="pre">49)</span></em><a class="headerlink" href="#sources.constants.Constants.GOLD" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.NB_SPRITES">
+<span class="sig-name descname"><span class="pre">NB_SPRITES</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#sources.constants.Constants.NB_SPRITES" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.RED">
+<span class="sig-name descname"><span class="pre">RED</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(255,</span> <span class="pre">0,</span> <span class="pre">0)</span></em><a class="headerlink" href="#sources.constants.Constants.RED" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.SCORE_VALUE">
+<span class="sig-name descname"><span class="pre">SCORE_VALUE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100</span></em><a class="headerlink" href="#sources.constants.Constants.SCORE_VALUE" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.SEP">
+<span class="sig-name descname"><span class="pre">SEP</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">','</span></em><a class="headerlink" href="#sources.constants.Constants.SEP" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.SILVER">
+<span class="sig-name descname"><span class="pre">SILVER</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(181,</span> <span class="pre">216,</span> <span class="pre">213)</span></em><a class="headerlink" href="#sources.constants.Constants.SILVER" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.SPRITES">
+<span class="sig-name descname"><span class="pre">SPRITES</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#sources.constants.Constants.SPRITES" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.SPRITE_AVAILABLE">
+<span class="sig-name descname"><span class="pre">SPRITE_AVAILABLE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'BLUE_GEM':</span> <span class="pre">True,</span> <span class="pre">'CANNONBALL':</span> <span class="pre">True,</span> <span class="pre">'COIN':</span> <span class="pre">True,</span> <span class="pre">'EGG':</span> <span class="pre">True,</span> <span class="pre">'GREEN_GEM':</span> <span class="pre">True,</span> <span class="pre">'HEART':</span> <span class="pre">True,</span> <span class="pre">'RUBY':</span> <span class="pre">True,</span> <span class="pre">'STAR':</span> <span class="pre">True}</span></em><a class="headerlink" href="#sources.constants.Constants.SPRITE_AVAILABLE" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.TIME_INCREASE_DIFFICULTY">
+<span class="sig-name descname"><span class="pre">TIME_INCREASE_DIFFICULTY</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">25</span></em><a class="headerlink" href="#sources.constants.Constants.TIME_INCREASE_DIFFICULTY" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.USERNAME_REGEX">
+<span class="sig-name descname"><span class="pre">USERNAME_REGEX</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'([0-9A-Za-z.\\-_*$£&amp;])'</span></em><a class="headerlink" href="#sources.constants.Constants.USERNAME_REGEX" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.VELOCITY">
+<span class="sig-name descname"><span class="pre">VELOCITY</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#sources.constants.Constants.VELOCITY" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sources.constants.Constants.WHITE">
+<span class="sig-name descname"><span class="pre">WHITE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(255,</span> <span class="pre">255,</span> <span class="pre">255)</span></em><a class="headerlink" href="#sources.constants.Constants.WHITE" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sources.game">
+<span id="sources-game-module"></span><h2>sources.game module<a class="headerlink" href="#module-sources.game" title="Lien permanent vers ce titre"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.game.Game">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.game.</span></span><span class="sig-name descname"><span class="pre">Game</span></span><a class="headerlink" href="#sources.game.Game" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>La classe Game permet la création d’objets qui permettent le bon fonctionnement du jeu.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.game.Game.check_events">
+<span class="sig-name descname"><span class="pre">check_events</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.game.Game.check_events" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet remplir les variables contenant les touches appuyées par l’utilisateur.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.game.Game.display_monitor">
+<span class="sig-name descname"><span class="pre">display_monitor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.game.Game.display_monitor" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet d’afficher des informations sur la partie en cours (Score, Temps, Nombre de vies).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.game.Game.display_sprites">
+<span class="sig-name descname"><span class="pre">display_sprites</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.game.Game.display_sprites" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet l’affichage des instances de sprites qui sont impliquées dans le jeu (Player, Pièces,
+Boulets de canon, …).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.game.Game.display_text">
+<span class="sig-name descname"><span class="pre">display_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(255,</span> <span class="pre">255,</span> <span class="pre">255)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.game.Game.display_text" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet d’afficher du texte sur l’écran.
+:param text: La chaine de caractère correspondante au message qui veut être affiché.
+:param size: La taille du texte sur l’écran.
+:param pos: Un tuple contenant la position en largeur et en hauteur du texte.
+:param color: Un tuple contenant la couleur sous le format RGB.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.game.Game.game_loop">
+<span class="sig-name descname"><span class="pre">game_loop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.game.Game.game_loop" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet l’exécution en boucle du jeu.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.game.Game.gameplay">
+<span class="sig-name descname"><span class="pre">gameplay</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.game.Game.gameplay" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet l’exécution d’une image pour le jeu.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.game.Game.increase_difficulty">
+<span class="sig-name descname"><span class="pre">increase_difficulty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.game.Game.increase_difficulty" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet d’augmenter la vitesse de déplacements des sprites mais aussi le nombre de sprites présents
+sur l’écran afin d’augmenter la difficulté.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.game.Game.reset_gameplay">
+<span class="sig-name descname"><span class="pre">reset_gameplay</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.game.Game.reset_gameplay" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de réinitialiser les variables de position, ou encore de score propre à chaque partie.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.game.Game.reset_keys">
+<span class="sig-name descname"><span class="pre">reset_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.game.Game.reset_keys" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de réinitialiser les variables contenant les touches appuyées par l’utilisateur.
+:param key: la valeur d’une touche qui veut être réinitialisé sans réinitialiser les autres.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sources.game.generate_falling_sprites">
+<span class="sig-prename descclassname"><span class="pre">sources.game.</span></span><span class="sig-name descname"><span class="pre">generate_falling_sprites</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.game.generate_falling_sprites" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette fonction permet de générer de manière aléatoire le sprite qui va être généré et de l’ajouter à une liste qui
+les contient tous.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sources.game.wait">
+<span class="sig-prename descclassname"><span class="pre">sources.game.</span></span><span class="sig-name descname"><span class="pre">wait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sprite_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.game.wait" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette fonction permet de mettre en non disponible un sprite pendant un certain temps afin de limiter son apparition.
+:param sprite_name: le nom du sprite en question.
+:param delta: le temps d’indisponibilité.</p>
+</dd></dl>
+
+</section>
+<section id="module-sources.menu">
+<span id="sources-menu-module"></span><h2>sources.menu module<a class="headerlink" href="#module-sources.menu" title="Lien permanent vers ce titre"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.menu.CreditsMenu">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.menu.</span></span><span class="sig-name descname"><span class="pre">CreditsMenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sources.menu.CreditsMenu" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#sources.menu.Menu" title="sources.menu.Menu"><code class="xref py py-class docutils literal notranslate"><span class="pre">sources.menu.Menu</span></code></a></p>
+<p>Cette classe permet de déterminer les différents éléments du menu des crédits.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.menu.CreditsMenu.display_content">
+<span class="sig-name descname"><span class="pre">display_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.menu.CreditsMenu.display_content" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet d’afficher les informations du menu correspondant.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.menu.GameOverMenu">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.menu.</span></span><span class="sig-name descname"><span class="pre">GameOverMenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sources.menu.GameOverMenu" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#sources.menu.Menu" title="sources.menu.Menu"><code class="xref py py-class docutils literal notranslate"><span class="pre">sources.menu.Menu</span></code></a></p>
+<p>Cette classe permet de déterminer les différents éléments du menu Game Over.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.menu.GameOverMenu.check_input">
+<span class="sig-name descname"><span class="pre">check_input</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.menu.GameOverMenu.check_input" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de prendre en compte les touches appuyées par l’utilisateur.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.menu.GameOverMenu.display_content">
+<span class="sig-name descname"><span class="pre">display_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.menu.GameOverMenu.display_content" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet d’afficher les informations du menu correspondant.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.menu.InputMenu">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.menu.</span></span><span class="sig-name descname"><span class="pre">InputMenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sources.menu.InputMenu" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#sources.menu.Menu" title="sources.menu.Menu"><code class="xref py py-class docutils literal notranslate"><span class="pre">sources.menu.Menu</span></code></a></p>
+<p>Cette classe permet de déterminer les différents éléments du menu des inputs du joueur concernant son pseudo.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.menu.InputMenu.check_input">
+<span class="sig-name descname"><span class="pre">check_input</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.menu.InputMenu.check_input" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de prendre en compte les touches appuyées par l’utilisateur.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.menu.InputMenu.display_content">
+<span class="sig-name descname"><span class="pre">display_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.menu.InputMenu.display_content" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet d’afficher les informations du menu correspondant.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.menu.MainMenu">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.menu.</span></span><span class="sig-name descname"><span class="pre">MainMenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sources.menu.MainMenu" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#sources.menu.Menu" title="sources.menu.Menu"><code class="xref py py-class docutils literal notranslate"><span class="pre">sources.menu.Menu</span></code></a></p>
+<p>Cette classe permet de déterminer les différents éléments du menu principal.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.menu.MainMenu.check_input">
+<span class="sig-name descname"><span class="pre">check_input</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.menu.MainMenu.check_input" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de prendre en compte les touches appuyées par l’utilisateur.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.menu.MainMenu.display_content">
+<span class="sig-name descname"><span class="pre">display_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.menu.MainMenu.display_content" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet d’afficher les informations du menu correspondant.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.menu.MainMenu.move_cursor">
+<span class="sig-name descname"><span class="pre">move_cursor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.menu.MainMenu.move_cursor" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de déplacer le curseur du menu principal, permettant ainsi au joueur de savoir dans quelle
+section il se situe.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.menu.Menu">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.menu.</span></span><span class="sig-name descname"><span class="pre">Menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sources.menu.Menu" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Cette classe permet de déterminer les différents éléments d’un menu.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.menu.Menu.blit_screen">
+<span class="sig-name descname"><span class="pre">blit_screen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.menu.Menu.blit_screen" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de mettre à jour l’écran de jeu.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.menu.Menu.check_input">
+<span class="sig-name descname"><span class="pre">check_input</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.menu.Menu.check_input" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de prendre en compte les touches appuyées par l’utilisateur.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.menu.Menu.display">
+<span class="sig-name descname"><span class="pre">display</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.menu.Menu.display" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de déterminer les actions qui vont être réalisées en boucle dans chaque menu.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.menu.Menu.display_content">
+<span class="sig-name descname"><span class="pre">display_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.menu.Menu.display_content" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet d’afficher les informations du menu correspondant.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.menu.ScoreMenu">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.menu.</span></span><span class="sig-name descname"><span class="pre">ScoreMenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">game</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sources.menu.ScoreMenu" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#sources.menu.Menu" title="sources.menu.Menu"><code class="xref py py-class docutils literal notranslate"><span class="pre">sources.menu.Menu</span></code></a></p>
+<p>Cette classe permet de déterminer les différents éléments du menu des scores.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.menu.ScoreMenu.display_content">
+<span class="sig-name descname"><span class="pre">display_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.menu.ScoreMenu.display_content" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet d’afficher les informations du menu correspondant.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.menu.ScoreMenu.display_scores">
+<span class="sig-name descname"><span class="pre">display_scores</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.menu.ScoreMenu.display_scores" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet d’afficher la table des scores dans le menu.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sources.score">
+<span id="sources-score-module"></span><h2>sources.score module<a class="headerlink" href="#module-sources.score" title="Lien permanent vers ce titre"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.score.Score">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.score.</span></span><span class="sig-name descname"><span class="pre">Score</span></span><a class="headerlink" href="#sources.score.Score" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>La classe Score permet de créer un objet qui contient les différents scores réalisés sur le jeu par différentes
+personnes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.score.Score.add_user">
+<span class="sig-name descname"><span class="pre">add_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.score.Score.add_user" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette fonction permet d’ajouter des données sur un utilisateur qui a réalisé une performance lors d’une partie.
+:param user: Un tuple qui contient le nom, le score et le temps de jeu du joueur.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.score.Score.get_best_users">
+<span class="sig-name descname"><span class="pre">get_best_users</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#sources.score.Score.get_best_users" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Permet d’obtenir les 5 meilleurs joueurs en termes de score.
+:return: Une liste contenant des tuples correspondant aux performances des joueurs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.score.Score.get_score_file">
+<span class="sig-name descname"><span class="pre">get_score_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.score.Score.get_score_file" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Permet de récupérer les informations des utilisateurs stockées dans un fichier CSV.
+Ces informations seront stockées dans un tableau qui est en attribut de l’objet score.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.score.Score.sort_users">
+<span class="sig-name descname"><span class="pre">sort_users</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.score.Score.sort_users" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette fonction permet de trier la liste qui contient les données sur les parties des joueurs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.score.Score.write_score_file">
+<span class="sig-name descname"><span class="pre">write_score_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.score.Score.write_score_file" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Permet de d’écrire les scores enregistrés dans le fichier CSV.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sources.sprite">
+<span id="sources-sprite-module"></span><h2>sources.sprite module<a class="headerlink" href="#module-sources.sprite" title="Lien permanent vers ce titre"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.sprite.CannonBall">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.sprite.</span></span><span class="sig-name descname"><span class="pre">CannonBall</span></span><a class="headerlink" href="#sources.sprite.CannonBall" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#sources.sprite.Sprite" title="sources.sprite.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">sources.sprite.Sprite</span></code></a></p>
+<p>Cette classe permet de définir des objets correspondants aux boulets de canon.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.CannonBall.collide">
+<span class="sig-name descname"><span class="pre">collide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#sources.sprite.User" title="sources.sprite.User"><span class="pre">sources.sprite.User</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.CannonBall.collide" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de détecter la collision du sprite avec le joueur et d’effectuer les actions
+correspondantes si tel est le cas.
+:param user: un objet user correspondant au sprite du joueur.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.sprite.Collectable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.sprite.</span></span><span class="sig-name descname"><span class="pre">Collectable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sources.sprite.Collectable" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#sources.sprite.Sprite" title="sources.sprite.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">sources.sprite.Sprite</span></code></a></p>
+<p>Cette classe permet de définir les objets collectibles par l’utilisateur(Pièce, Gemme Bleue, Gemme Verte et Ruby).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.Collectable.collide">
+<span class="sig-name descname"><span class="pre">collide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#sources.sprite.User" title="sources.sprite.User"><span class="pre">sources.sprite.User</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.Collectable.collide" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de détecter la collision du sprite avec le joueur et d’effectuer les actions
+correspondantes si tel est le cas.
+:param user: un objet user correspondant au sprite du joueur.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.sprite.Egg">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.sprite.</span></span><span class="sig-name descname"><span class="pre">Egg</span></span><a class="headerlink" href="#sources.sprite.Egg" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#sources.sprite.Sprite" title="sources.sprite.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">sources.sprite.Sprite</span></code></a></p>
+<p>Cette classe permet de définir des sprites correspondant aux œufs.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.Egg.collide">
+<span class="sig-name descname"><span class="pre">collide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#sources.sprite.User" title="sources.sprite.User"><span class="pre">sources.sprite.User</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.Egg.collide" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de détecter la collision du sprite avec le joueur et d’effectuer les actions
+correspondantes si tel est le cas.
+:param user: un objet user correspondant au sprite du joueur.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.sprite.Heart">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.sprite.</span></span><span class="sig-name descname"><span class="pre">Heart</span></span><a class="headerlink" href="#sources.sprite.Heart" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#sources.sprite.Sprite" title="sources.sprite.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">sources.sprite.Sprite</span></code></a></p>
+<p>Cette classe permet de définir des sprites correspondants aux cœurs.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.Heart.collide">
+<span class="sig-name descname"><span class="pre">collide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#sources.sprite.User" title="sources.sprite.User"><span class="pre">sources.sprite.User</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.Heart.collide" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de détecter la collision du sprite avec le joueur et d’effectuer les actions
+correspondantes si tel est le cas.
+:param user: un objet user correspondant au sprite du joueur.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.sprite.Player">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.sprite.</span></span><span class="sig-name descname"><span class="pre">Player</span></span><a class="headerlink" href="#sources.sprite.Player" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#sources.sprite.Sprite" title="sources.sprite.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">sources.sprite.Sprite</span></code></a></p>
+<p>Cette classe permet de définir les spécificités du sprite d’un joueur.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.Player.decrease_velocity">
+<span class="sig-name descname"><span class="pre">decrease_velocity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.Player.decrease_velocity" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de diminuer la vitesse du joueur lorsqu’un œuf a été touché.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.Player.increase_velocity">
+<span class="sig-name descname"><span class="pre">increase_velocity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.Player.increase_velocity" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet d’augmenter la vitesse du joueur lorsqu’une étoile a été touchée.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.Player.move">
+<span class="sig-name descname"><span class="pre">move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_pressed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.Player.move" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de modifier la position du joueur en fonction des touches pressées par l’utilisateur.
+:param key_pressed: un dictionnaire contenant les touches appuyées par l’utilisateur.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.Player.move_left">
+<span class="sig-name descname"><span class="pre">move_left</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.Player.move_left" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de mettre à jour la position et l’image du joueur si le déplacement est vers la gauche.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.Player.move_right">
+<span class="sig-name descname"><span class="pre">move_right</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.Player.move_right" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de mettre à jour la position et l’image du joueur si le déplacement est vers la droite.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.Player.reset_position">
+<span class="sig-name descname"><span class="pre">reset_position</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.Player.reset_position" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de réinitialiser la position du joueur sur l’écran.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.sprite.Skull">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.sprite.</span></span><span class="sig-name descname"><span class="pre">Skull</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sources.sprite.Skull" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#sources.sprite.Sprite" title="sources.sprite.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">sources.sprite.Sprite</span></code></a></p>
+<p>Cette classe permet de créer un sprite correspondant à une tête de mort.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.sprite.Sprite">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.sprite.</span></span><span class="sig-name descname"><span class="pre">Sprite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sources.sprite.Sprite" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">pygame.sprite.Sprite</span></code></p>
+<p>Cette classe permet de définir le fonctionnement d’un sprite dans le jeu.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.Sprite.animate">
+<span class="sig-name descname"><span class="pre">animate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.Sprite.animate" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de changer l’image afin de donner l’impression que le sprite est animé.
+:param reverse: si la valeur est à True, elle permet de mettre en place l’animation inverse.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.Sprite.check_if_visible">
+<span class="sig-name descname"><span class="pre">check_if_visible</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#sources.sprite.Sprite.check_if_visible" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de savoir si le sprite est présent sur l’écran.
+:return: un booléen correspondant au fait que le sprite soit présent ou non sur l’écran de jeu.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.Sprite.collide">
+<span class="sig-name descname"><span class="pre">collide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sprite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pygame.sprite.Sprite</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.Sprite.collide" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de détecter la collision du sprite avec un autre sprite
+:param sprite: un objet correspondant à l’autre sprite.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.Sprite.fall">
+<span class="sig-name descname"><span class="pre">fall</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.Sprite.fall" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de modifier la position du sprite afin de donner l’impression que celui-ci tombe.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.sprite.Star">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.sprite.</span></span><span class="sig-name descname"><span class="pre">Star</span></span><a class="headerlink" href="#sources.sprite.Star" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#sources.sprite.Sprite" title="sources.sprite.Sprite"><code class="xref py py-class docutils literal notranslate"><span class="pre">sources.sprite.Sprite</span></code></a></p>
+<p>Cette classe permet de définir le sprite correspondant à une étoile.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.Star.collide">
+<span class="sig-name descname"><span class="pre">collide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#sources.sprite.User" title="sources.sprite.User"><span class="pre">sources.sprite.User</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.Star.collide" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de détecter la collision du sprite avec le joueur et d’effectuer les actions
+correspondantes si tel est le cas.
+:param user: un objet user correspondant au sprite du joueur.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sources.sprite.User">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sources.sprite.</span></span><span class="sig-name descname"><span class="pre">User</span></span><a class="headerlink" href="#sources.sprite.User" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#sources.sprite.Player" title="sources.sprite.Player"><code class="xref py py-class docutils literal notranslate"><span class="pre">sources.sprite.Player</span></code></a></p>
+<p>Cette classe permet de créer un utilisateur.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.User.reset_all">
+<span class="sig-name descname"><span class="pre">reset_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.User.reset_all" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de réinitialiser les attributs du joueur spécifique à une partie en particulier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.User.reset_name">
+<span class="sig-name descname"><span class="pre">reset_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.User.reset_name" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de réinitialiser le nom du joueur.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sources.sprite.User.update_time">
+<span class="sig-name descname"><span class="pre">update_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sources.sprite.User.update_time" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Cette méthode permet de mettre à jour le temps du joueur pour une partie.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sources">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sources" title="Lien permanent vers ce titre"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Arthur PELLEGRINI, Clément BRISSARD, Osama RAHIM.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
