@@ -8,7 +8,7 @@ import pygame
 from .constants import Constants
 from .menu import MainMenu, InputMenu, GameOverMenu, ScoreMenu, CreditsMenu
 from .score import Score
-from .sprite import User, Collectable, CannonBall
+from .sprite import User, Collectable, CannonBall, Heart, Egg, Star
 
 
 class Game:
@@ -121,12 +121,12 @@ class Game:
             luck = random.randint(0, 100)
             if luck in range(0, 35):  # CannonBall
                 Constants.SPRITES.append(CannonBall())
-            # elif luck in range(35, 40):  # Heart
-            #     Constants.SPRITES.append(Entity("HEART"))
-            # elif luck in range(40, 45):  # Egg
-            #     Constants.SPRITES.append(Entity("EGG"))
-            # elif luck in range(45, 50):  # Star
-            #     Constants.SPRITES.append(Entity("STAR"))
+            elif luck in range(35, 40):  # Heart
+                Constants.SPRITES.append(Heart())
+            elif luck in range(40, 45):  # Egg
+                Constants.SPRITES.append(Egg())
+            elif luck in range(45, 50):  # Star
+                Constants.SPRITES.append(Star())
             elif luck in range(50, 80):  # Coin
                 Constants.SPRITES.append(Collectable("COIN"))
             elif luck in range(80, 89):  # Blue Gem

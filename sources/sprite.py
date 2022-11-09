@@ -19,7 +19,7 @@ class Sprite(pygame.sprite.Sprite):
         self.margin = 25
         self.ground_height = 100 + self.margin
         self.rect = self.image.get_rect()
-        self.velocity = 5
+        self.velocity = Constants.VELOCITY
         self.rate = 8  # vitesse du changement d'image dans l'animation
 
     def animate(self, reverse=False):
