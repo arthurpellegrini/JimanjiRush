@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-s
 
 class Constants:
+    """
+    Cette classe contient des variables globales pour tout le projet.
+    """
     # DISPLAY SIZE
     DISPLAY_W: int = 1280
     DISPLAY_H: int = 720
@@ -23,7 +26,7 @@ class Constants:
     USERNAME_REGEX: str = r"([0-9A-Za-z.\-_*$£&])"
 
     # SCORE
-    SEP = ","
+    SEP: str = ","
 
     # SPRITES
     SCORE_VALUE: int = 100
