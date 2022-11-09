@@ -20,4 +20,16 @@ class Constants:
     BRONZE: tuple = (217, 116, 82)
 
     # REGEX
-    USERNAME_REGEX: str = r"([0-9A-Za-z.-_*$£&])"
+    USERNAME_REGEX: str = r"([0-9A-Za-z.\-_*$£&])"
+
+    # SCORE
+    SEP = ","
+
+    # SPRITES
+    SCORE_VALUE: int = 100
+    TIME_INCREASE_DIFFICULTY: int = 25
+    NB_SPRITES: int = 5
+    VELOCITY: int = 8
+    SPRITES: list = []
+    SPRITE_AVAILABLE: dict = {"CANNONBALL": True, "HEART": True, "EGG": True, "STAR": True, "COIN": True,
+                              "BLUE_GEM": True, "GREEN_GEM": True, "RUBY": True}

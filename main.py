@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import os
+
 import pygame
 
 from sources import Game, Constants
@@ -29,7 +30,18 @@ def get_assets() -> dict:
                 # On récupère le chemin du fichier
                 sub_parent_elem_path = os.path.join(parent_elem_path, sub_elem)
                 # On ajoute l'élément au tableau sous la forme d'une image Pygame
-                assets[parent_elem_dir_name].append(pygame.image.load(sub_parent_elem_path))
+                image = pygame.image.load(sub_parent_elem_path)
+                if parent_elem_dir_name == "PLAYER":
+                    image = pygame.transform.scale(image, (21 * 6, 33 * 6))
+                elif parent_elem_dir_name == "IDDLE":
+                    image = pygame.transform.scale(image, (17 * 6, 31 * 6))
+                elif parent_elem_dir_name == "SKULL":
+                    image = pygame.transform.scale(image, (62 * 3, 75 * 3))
+                elif parent_elem_dir_name == "BACKGROUND":
+                    image = pygame.transform.scale(image, (Constants.DISPLAY_W, Constants.DISPLAY_H))
+                elif parent_elem_dir_name != "MEDAL":
+                    image = pygame.transform.scale(image, (36 * 1.5, 45 * 1.5))
+                assets[parent_elem_dir_name].append(image)
 
         else:  # Sinon on sait que c'est la police
             if parent_elem_path.split(".")[-1] == "ttf":
@@ -44,5 +56,5 @@ if __name__ == "__main__":
     game = Game()
 
     while game.running:
-        game.current_menu.display_menu()
+        game.current_menu.display()
         game.game_loop()

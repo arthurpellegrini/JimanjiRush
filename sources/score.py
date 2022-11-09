@@ -1,32 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-s
-class UserScore:
-    """
-    La classe UserScore permet de créer un objet qui contient un nom, un score et une durée de jeu qui lui est associé.
-    """
-    def __init__(self, name: str, score: int, time: int):
-        """
-        Le constructeur de la classe UserScore.
-        :param name: Le nom du joueur.
-        :param score: Le nombre de points qu'il a obtenu durant sa partie.
-        :param time: Son temps de survie lors de sa partie.
-        """
-        self.name = name
-        self.score = score
-        self.time = time
-
-    def __str__(self) -> str:
-        """
-        Permet l'affichage d'un objet UserScore sous la forme d'une chaine de caractères.
-        :return: la chaine de caractère correspondante.
-        """
-        return f"{self.name},{self.score},{self.time}\n"
+from .constants import Constants
 
 
 class Score:
     """
     La classe Score permet de créer un objet qui contient les différents scores réalisés sur le jeu.
     """
+
     def __init__(self):
         """
         Le constructeur de la classe Score.
@@ -35,7 +16,7 @@ class Score:
         self.score_file_path = "data/scores.csv"
         self.get_score_file()
 
-    def add_user(self, user: UserScore) -> None:
+    def add_user(self, user: tuple) -> None:
         """
         Cette fonction permet d'ajouter des données sur un utilisateur qui a réalisé un score lors d'une partie.
         :param user: Un objet UserScore qui contient le nom, le score et le temps de jeu du joueur.
@@ -43,13 +24,14 @@ class Score:
         """
         self.users.append(user)
         self.sort_users()
+        self.write_score_file()
 
     def sort_users(self) -> None:
         """
         Cette fonction permet de trier la liste qui contient les données sur les parties des joueurs.
         :return: None.
         """
-        self.users.sort(key=lambda user: user.score, reverse=True)
+        self.users.sort(key=lambda user: user[1], reverse=True)
 
     def get_best_users(self):
         """
@@ -68,8 +50,8 @@ class Score:
             lines = file.readlines()
 
         for raw_line in lines:
-            line = raw_line.split(",")
-            user = UserScore(line[0], int(line[1]), int(line[2]))
+            line = raw_line.split(Constants.SEP)
+            user = (line[0], int(line[1]), int(line[2]))
             self.add_user(user)
 
     def write_score_file(self) -> None:
@@ -87,5 +69,5 @@ class Score:
         """
         output = ""
         for user in self.users:
-            output += user.__str__()
+            output += f"{user[0]}{Constants.SEP}{user[1]}{Constants.SEP}{user[2]}\n"
         return output
