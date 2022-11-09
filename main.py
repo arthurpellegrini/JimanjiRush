@@ -10,7 +10,7 @@ from sources import Game, Constants
 def get_assets() -> dict:
     """
     Cette fonction permet la récupération des éléments graphiques du jeu.
-    :return: un dictionnaire contenant toutes les images et la police du dossier assets.
+    :return: un dictionnaire contenant ces éléments sous forme d'objets pygame.
     """
     root = os.path.abspath("assets/")
     assets = {}

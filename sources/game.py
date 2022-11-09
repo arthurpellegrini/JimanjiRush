@@ -14,16 +14,28 @@ from .sprite import User, Collectable, CannonBall, Heart, Egg, Star
 
 
 def wait(sprite_name: str, delta: float) -> None:
+    """
+    Cette fonction permet de mettre en non disponible un sprite pendant un certain temps afin de limiter son apparition.
+    :param sprite_name: le nom du sprite en question.
+    :param delta: le temps d'indisponibilité.
+    """
     Constants.SPRITE_AVAILABLE[sprite_name] = False
 
-    def wait_and_restore():
+    def wait_and_restore() -> None:
+        """
+        Cette fonction permet d'attendre le temps spécifié puis de remettre le sprite comme disponible.
+        """
         time.sleep(delta)
         Constants.SPRITE_AVAILABLE[sprite_name] = True
 
     threading.Thread(target=wait_and_restore, daemon=True).start()
 
 
-def generate_object():
+def generate_falling_sprites() -> None:
+    """
+    Cette fonction permet de générer de manière aléatoire le sprite qui va être généré et de l'ajouter à une liste qui
+    les contient tous.
+    """
     if len(Constants.SPRITES) < Constants.NB_SPRITES:
         luck = random.randint(0, 100)
         if luck in range(0, 35) and Constants.SPRITE_AVAILABLE["CANNONBALL"]:
@@ -53,7 +65,14 @@ def generate_object():
 
 
 class Game:
+    """
+    La classe Game permet la création d'objets qui permettent le bon fonctionnement du jeu.
+    """
+
     def __init__(self):
+        """
+        Le constructeur de la classe Game.
+        """
         pygame.init()
         pygame.display.set_icon(Constants.ASSETS["ICON"])
         pygame.display.set_caption("Jimanji Rush")
@@ -85,7 +104,10 @@ class Game:
         self.credits_menu = CreditsMenu(self)
         self.current_menu = self.main_menu
 
-    def check_events(self):
+    def check_events(self) -> None:
+        """
+        Cette méthode permet remplir les variables contenant les touches appuyées par l'utilisateur.
+        """
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
@@ -101,7 +123,11 @@ class Game:
             elif event.type == pygame.KEYUP:
                 self.key_pressed[event.key] = False
 
-    def reset_keys(self, key=None):
+    def reset_keys(self, key=None) -> None:
+        """
+        Cette méthode permet de réinitialiser les variables contenant les touches appuyées par l'utilisateur.
+        :param key: la valeur d'une touche qui veut être réinitialisé sans réinitialiser les autres.
+        """
         if key is None:
             for key_code in list(self.key_pressed.keys()):
                 self.key_pressed[key_code] = False
@@ -109,14 +135,24 @@ class Game:
         else:
             self.key_pressed[key] = False
 
-    def display_text(self, text, size, pos: tuple, color=Constants.WHITE):
+    def display_text(self, text: str, size: int, pos: tuple, color: tuple = Constants.WHITE) -> None:
+        """
+        Cette méthode permet d'afficher du texte sur l'écran.
+        :param text: La chaine de caractère correspondante au message qui veut être affiché.
+        :param size: La taille du texte sur l'écran.
+        :param pos: Un tuple contenant la position en largeur et en hauteur du texte.
+        :param color: Un tuple contenant la couleur sous le format RGB.
+        """
         font = pygame.font.Font(Constants.ASSETS["FONT"], size)
         text_surface = font.render(text, True, color)
         text_rect = text_surface.get_rect()
         text_rect.center = pos
         self.display.blit(text_surface, text_rect)
 
-    def game_loop(self):
+    def game_loop(self) -> None:
+        """
+        Cette méthode permet l'exécution en boucle du jeu.
+        """
         while self.playing:
             self.check_events()
             self.gameplay()
@@ -125,7 +161,10 @@ class Game:
             self.clock.tick(60)
             self.iterations += 1
 
-    def gameplay(self):
+    def gameplay(self) -> None:
+        """
+        Cette méthode permet l'exécution d'une image pour le jeu.
+        """
         if self.key_pressed.get(pygame.K_ESCAPE) or self.user.hearts == 0:
             self.current_menu = self.main_menu
             if self.user.hearts == 0:
@@ -135,12 +174,16 @@ class Game:
 
         self.display.blit(Constants.ASSETS["BACKGROUND"][0], (0, 0))
         self.increase_difficulty()
-        generate_object()
+        self.user.update_time()
+        generate_falling_sprites()
         self.display_sprites()
         self.display_monitor()
         self.reset_keys(key=pygame.K_ESCAPE)
 
-    def reset_gameplay(self):
+    def reset_gameplay(self) -> None:
+        """
+        Cette méthode permet de réinitialiser les variables de position, ou encore de score propre à chaque partie.
+        """
         self.user.reset_all()
         self.user.reset_position()
         self.user.start_time = pygame.time.get_ticks()
@@ -149,27 +192,37 @@ class Game:
         Constants.TIME_INCREASE_DIFFICULTY = self.initial_time_increase_difficulty
         Constants.NB_SPRITES = self.initial_nb_sprites
 
-    def increase_difficulty(self):
+    def increase_difficulty(self) -> None:
+        """
+        Cette méthode permet d'augmenter la vitesse de déplacements des sprites mais aussi le nombre de sprites présents
+        sur l'écran afin d'augmenter la difficulté.
+        """
         if self.user.time >= Constants.TIME_INCREASE_DIFFICULTY:
             if Constants.NB_SPRITES < 10:
                 Constants.NB_SPRITES += 1
             Constants.VELOCITY += 2
             Constants.TIME_INCREASE_DIFFICULTY += 50
 
-    def display_sprites(self):
-        for entity in Constants.SPRITES:
-            if not entity.check_if_visible():
-                Constants.SPRITES.remove(entity)
+    def display_sprites(self) -> None:
+        """
+        Cette méthode permet l'affichage des instances de sprites qui sont impliquées dans le jeu (Player, Pièces,
+        Boulets de canon, ...).
+        """
+        for sprite in Constants.SPRITES:
+            if not sprite.check_if_visible():
+                Constants.SPRITES.remove(sprite)
             else:
-                entity.collide(self.user)
-                entity.fall()
-                entity.animate()
-            self.display.blit(entity.image, entity.rect)
+                sprite.collide(self.user)
+                sprite.fall()
+                sprite.animate()
+            self.display.blit(sprite.image, sprite.rect)
         self.user.move(self.key_pressed)
         self.display.blit(self.user.image, self.user.rect)
 
-    def display_monitor(self):
-        self.user.update_time()
+    def display_monitor(self) -> None:
+        """
+        Cette méthode permet d'afficher des informations sur la partie en cours (Score, Temps, Nombre de vies).
+        """
         self.display_text("Score: " + str(self.user.score), 30, (Constants.DISPLAY_W / 6, Constants.DISPLAY_H / 15))
         self.display_text("Time: " + str(self.user.time), 30, (Constants.DISPLAY_W / 6 * 3, Constants.DISPLAY_H / 15))
         self.display_text("Heart: " + str(self.user.hearts), 30,
