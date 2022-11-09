@@ -31,4 +31,5 @@ class Constants:
     NB_SPRITES: int = 5
     VELOCITY: int = 8
     SPRITES: list = []
-    SPRITE_AVAILABLE: dict = {"CANNONBALL": True, "HEART": True, "EGG": True, "STAR": True}
+    SPRITE_AVAILABLE: dict = {"CANNONBALL": True, "HEART": True, "EGG": True, "STAR": True, "COIN": True,
+                              "BLUE_GEM": True, "GREEN_GEM": True, "RUBY": True}

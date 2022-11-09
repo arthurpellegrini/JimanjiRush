@@ -77,7 +77,8 @@ class MainMenu(Menu):
         self.game.display_text("CREDITS", 40, (self.pos_x_credits, self.pos_y_credits))
         self.game.display_text("Use ARROWS to select a section and press RETURN to valid", 20,
                                (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 13))
-        self.game.display_text('Press ESC to quit the game', 20, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 14))
+        self.game.display_text('Press ESC to quit the game', 20,
+                               (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 14))
 
     def draw_cursor(self):
         self.game.display_text('>', 40, (self.cursor_rect.x, self.cursor_rect.y))
@@ -123,8 +124,8 @@ class InputMenu(Menu):
             if self.input == "":
                 self.empty = True
             else:
-                self.game.user.name = self.input
-                self.game.user.start_time = pygame.time.get_ticks()
+                self.game.user.username = self.input
+                self.game.reset_gameplay()
                 self.game.playing = True
                 self.run_display = False
 
@@ -146,7 +147,8 @@ class InputMenu(Menu):
             cursor = " "
         self.iterations += 1
 
-        self.game.display_text("Your name: " + self.input + cursor, 40, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 3))
+        self.game.display_text("Your name: " + self.input + cursor, 40,
+                               (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 3))
 
         if self.empty:
             error_text = "Username field can't be empty"
@@ -170,22 +172,26 @@ class GameOverMenu(Menu):
     def check_input(self):
         if self.game.key_pressed.get(pygame.K_ESCAPE):
             self.game.current_menu = self.game.main_menu
-            self.game.user.reset_all()
+            self.game.reset_gameplay()
             self.game.user.reset_name()
             self.run_display = False
 
         if self.game.key_pressed.get(pygame.K_RETURN):
             self.game.current_menu = self.game.main_menu
-            self.game.user.reset_all()
-            self.game.user.start_time = pygame.time.get_ticks()
+            self.game.reset_gameplay()
             self.game.playing = True
             self.run_display = False
 
     def display_content(self):
         self.skull.animate()
         self.game.display.blit(self.skull.image, self.skull.rect)
+        self.game.display_text('Game Over', 40, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 5 * 2))
 
-        self.game.display_text('Game Over', 40, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 5 * 3))
+        self.game.display_text(f'Score : {self.game.user.score}', 30,
+                               (Constants.DISPLAY_W / 5 * 2, Constants.DISPLAY_H / 5 * 3))
+        self.game.display_text(f'Time : {self.game.user.time}', 30,
+                               (Constants.DISPLAY_W / 5 * 3, Constants.DISPLAY_H / 5 * 3))
+
         self.game.display_text('Press RETURN to Replay', 20, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 13))
         self.game.display_text('Press ESC to return to Main Menu', 20,
                                (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 14))

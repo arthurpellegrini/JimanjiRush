@@ -13,7 +13,7 @@ from .score import Score
 from .sprite import User, Collectable, CannonBall, Heart, Egg, Star
 
 
-def wait(sprite_name: str, delta: int) -> None:
+def wait(sprite_name: str, delta: float) -> None:
     Constants.SPRITE_AVAILABLE[sprite_name] = False
 
     def wait_and_restore():
@@ -28,7 +28,7 @@ def generate_object():
         luck = random.randint(0, 100)
         if luck in range(0, 35) and Constants.SPRITE_AVAILABLE["CANNONBALL"]:
             Constants.SPRITES.append(CannonBall())
-            wait("CANNONBALL", 1)
+            wait("CANNONBALL", 0.1)
         elif luck in range(35, 40) and Constants.SPRITE_AVAILABLE["HEART"]:
             Constants.SPRITES.append(Heart())
             wait("HEART", 10)
@@ -38,14 +38,18 @@ def generate_object():
         elif luck in range(45, 50) and Constants.SPRITE_AVAILABLE["STAR"]:
             Constants.SPRITES.append(Star())
             wait("STAR", 5)
-        elif luck in range(50, 80):
+        elif luck in range(50, 80) and Constants.SPRITE_AVAILABLE["COIN"]:
             Constants.SPRITES.append(Collectable("COIN"))
-        elif luck in range(80, 89):
+            wait("COIN", 0.5)
+        elif luck in range(80, 89) and Constants.SPRITE_AVAILABLE["BLUE_GEM"]:
             Constants.SPRITES.append(Collectable("BLUE_GEM"))
-        elif luck in range(89, 95):
+            wait("BLUE_GEM", 1)
+        elif luck in range(89, 95) and Constants.SPRITE_AVAILABLE["GREEN_GEM"]:
             Constants.SPRITES.append(Collectable("GREEN_GEM"))
-        elif luck in range(95, 100):
+            wait("GREEN_GEM", 3)
+        elif luck in range(95, 100) and Constants.SPRITE_AVAILABLE["RUBY"]:
             Constants.SPRITES.append(Collectable("RUBY"))
+            wait("RUBY", 6)
 
 
 class Game:
@@ -69,6 +73,8 @@ class Game:
         self.scores = Score()
 
         self.initial_velocity = Constants.VELOCITY
+        self.initial_time_increase_difficulty = Constants.TIME_INCREASE_DIFFICULTY
+        self.initial_nb_sprites = Constants.NB_SPRITES
         self.cannonball_available, self.heart_available = True, True
         self.egg_available, self.star_available = True, True
 
@@ -123,9 +129,8 @@ class Game:
         if self.key_pressed.get(pygame.K_ESCAPE) or self.user.hearts == 0:
             self.current_menu = self.main_menu
             if self.user.hearts == 0:
-                self.scores.add_user((self.user.name, self.user.score, self.user.time))
+                self.scores.add_user((self.user.username, self.user.score, self.user.time))
                 self.current_menu = self.game_over_menu
-            self.reset_gameplay()
             self.playing = False
 
         self.display.blit(Constants.ASSETS["BACKGROUND"][0], (0, 0))
@@ -138,15 +143,18 @@ class Game:
     def reset_gameplay(self):
         self.user.reset_all()
         self.user.reset_position()
+        self.user.start_time = pygame.time.get_ticks()
         Constants.SPRITES.clear()
         Constants.VELOCITY = self.initial_velocity
+        Constants.TIME_INCREASE_DIFFICULTY = self.initial_time_increase_difficulty
+        Constants.NB_SPRITES = self.initial_nb_sprites
 
     def increase_difficulty(self):
         if self.user.time >= Constants.TIME_INCREASE_DIFFICULTY:
             if Constants.NB_SPRITES < 10:
                 Constants.NB_SPRITES += 1
-            Constants.VELOCITY += 4
-            Constants.TIME_INCREASE_DIFFICULTY += 25
+            Constants.VELOCITY += 2
+            Constants.TIME_INCREASE_DIFFICULTY += 50
 
     def display_sprites(self):
         for entity in Constants.SPRITES:

@@ -12,7 +12,7 @@ from .constants import Constants
 class Sprite(pygame.sprite.Sprite):
     def __init__(self, name: str):
         super().__init__()
-        self.name = name
+        self.username = name
         self.current_image = 0
         self.images = [f.convert_alpha() for f in Constants.ASSETS[name]]
         self.image = self.images[0]
@@ -50,7 +50,6 @@ class Player(Sprite):
         self.rect.center = (Constants.DISPLAY_W / 9, Constants.DISPLAY_H - self.ground_height)
 
     def move(self, key_pressed: dict):
-        self.velocity = Constants.VELOCITY
         if key_pressed.get(pygame.K_LEFT):
             self.left, self.right = True, False
             self.move_left()
@@ -79,24 +78,24 @@ class Player(Sprite):
 
     def increase_velocity(self):
         self.star = True
-        self.last_velocity = Constants.VELOCITY * 0.5
-        self.velocity += self.last_velocity
+        self.last_velocity = self.velocity
+        self.velocity *= 1.5
 
         def wait_and_restore():
-            time.sleep(1)
-            self.velocity -= self.last_velocity
+            time.sleep(2)
+            self.velocity = self.last_velocity
             self.star = False
 
         threading.Thread(target=wait_and_restore, daemon=True).start()
 
     def decrease_velocity(self):
         self.egg = True
-        self.last_velocity = Constants.VELOCITY * 0.5
-        self.velocity -= self.last_velocity
+        self.last_velocity = self.velocity
+        self.velocity *= 0.5
 
         def wait_and_restore():
-            time.sleep(1)
-            self.velocity += self.last_velocity
+            time.sleep(2)
+            self.velocity = self.last_velocity
             self.egg = False
 
         threading.Thread(target=wait_and_restore, daemon=True).start()
@@ -105,7 +104,7 @@ class Player(Sprite):
 class User(Player):
     def __init__(self):
         super().__init__()
-        self.name = ""
+        self.username = ""
         self.score = 0
         self.start_time = 0
         self.time = 0
@@ -115,7 +114,7 @@ class User(Player):
         self.time = (abs(self.start_time - pygame.time.get_ticks())) // 1000
 
     def reset_name(self):
-        self.name = ""
+        self.username = ""
 
     def reset_score(self):
         self.score = 0
@@ -145,16 +144,16 @@ class Collectable(Sprite):
     def collide(self, user: User):
         if self.rect.colliderect(user.rect):
             Constants.SPRITES.remove(self)
-            if self.name == "COIN":
+            if self.username == "COIN":
                 user.score += Constants.SCORE_VALUE * 5
 
-            elif self.name == "BLUE_GEM":
+            elif self.username == "BLUE_GEM":
                 user.score += Constants.SCORE_VALUE * 10
 
-            elif self.name == "GREEN_GEM":
+            elif self.username == "GREEN_GEM":
                 user.score += Constants.SCORE_VALUE * 40
 
-            elif self.name == "RUBY":
+            elif self.username == "RUBY":
                 user.score += Constants.SCORE_VALUE * 80
 
 
