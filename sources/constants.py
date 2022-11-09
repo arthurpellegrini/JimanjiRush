@@ -22,5 +22,11 @@ class Constants:
     # REGEX
     USERNAME_REGEX: str = r"([0-9A-Za-z.-_*$£&])"
 
-    #
-    VELOCITY: int = 1
+    # SCORE
+    SEP = ","
+
+    # SPRITES
+    SCORE_VALUE: int = 100
+    NB_SPRITES: int = 10
+    VELOCITY: int = 10
+    SPRITES: list = []

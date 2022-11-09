@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-s
 import pygame
 
-from .constants import Constants
+from .constants import *
 from .sprite import Skull
 
 
@@ -68,20 +68,19 @@ class MainMenu(Menu):
             self.run_display = False
 
     def display_content(self):
-        self.game.draw_text("Jimanji Rush", 80, (self.width_center, self.heigth_center))
+        self.game.display_text("Jimanji Rush", 80, (self.width_center, self.heigth_center))
         self.game.display.blit(pygame.transform.scale(Constants.ASSETS["ICON"], (90, 90)),
                                (self.width_center - 55, self.heigth_center - 110))
         self.draw_cursor()
-        self.game.draw_text("PLAY", 40, (self.pox_x_play, self.pos_y_play))
-        self.game.draw_text("SCORES", 40, (self.pos_x_scores, self.pos_y_scores))
-        self.game.draw_text("CREDITS", 40, (self.pos_x_credits, self.pos_y_credits))
-        self.game.draw_text("Use ARROWS to select a section and press RETURN to valid", 20,
-                            (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 13))
-        self.game.draw_text('Press ESC to quit the game', 20, (Constants.DISPLAY_W / 2,
-                                                               Constants.DISPLAY_H / 15 * 14))
+        self.game.display_text("PLAY", 40, (self.pox_x_play, self.pos_y_play))
+        self.game.display_text("SCORES", 40, (self.pos_x_scores, self.pos_y_scores))
+        self.game.display_text("CREDITS", 40, (self.pos_x_credits, self.pos_y_credits))
+        self.game.display_text("Use ARROWS to select a section and press RETURN to valid", 20,
+                               (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 13))
+        self.game.display_text('Press ESC to quit the game', 20, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 14))
 
     def draw_cursor(self):
-        self.game.draw_text('>', 40, (self.cursor_rect.x, self.cursor_rect.y))
+        self.game.display_text('>', 40, (self.cursor_rect.x, self.cursor_rect.y))
 
     def move_cursor(self):
         if self.game.key_pressed.get(pygame.K_DOWN):
@@ -124,6 +123,8 @@ class InputMenu(Menu):
             if self.input == "":
                 self.empty = True
             else:
+                self.game.user.name = self.input
+                self.game.user.start_time = pygame.time.get_ticks()
                 self.game.playing = True
                 self.run_display = False
 
@@ -145,7 +146,7 @@ class InputMenu(Menu):
             cursor = " "
         self.iterations += 1
 
-        self.game.draw_text("Your name: " + self.input + cursor, 40, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 3))
+        self.game.display_text("Your name: " + self.input + cursor, 40, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 3))
 
         if self.empty:
             error_text = "Username field can't be empty"
@@ -154,10 +155,10 @@ class InputMenu(Menu):
         else:
             error_text = ""
 
-        self.game.draw_text(error_text, 20, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 3 * 2), Constants.RED)
-        self.game.draw_text("Press RETURN to play", 20, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 13))
-        self.game.draw_text('Press ESC to return to Main Menu', 20, (Constants.DISPLAY_W / 2,
-                                                                     Constants.DISPLAY_H / 15 * 14))
+        self.game.display_text(error_text, 20, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 3 * 2), Constants.RED)
+        self.game.display_text("Press RETURN to play", 20, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 13))
+        self.game.display_text('Press ESC to return to Main Menu', 20,
+                               (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 14))
 
 
 class GameOverMenu(Menu):
@@ -169,10 +170,14 @@ class GameOverMenu(Menu):
     def check_input(self):
         if self.game.key_pressed.get(pygame.K_ESCAPE):
             self.game.current_menu = self.game.main_menu
+            self.game.user.reset_all()
+            self.game.user.reset_name()
             self.run_display = False
 
         if self.game.key_pressed.get(pygame.K_RETURN):
             self.game.current_menu = self.game.main_menu
+            self.game.user.reset_all()
+            self.game.user.start_time = pygame.time.get_ticks()
             self.game.playing = True
             self.run_display = False
 
@@ -180,10 +185,10 @@ class GameOverMenu(Menu):
         self.skull.animate()
         self.game.display.blit(self.skull.image, self.skull.rect)
 
-        self.game.draw_text('Game Over', 40, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 5 * 3))
-        self.game.draw_text('Press RETURN to Replay', 20, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 13))
-        self.game.draw_text('Press ESC to return to Main Menu', 20,
-                            (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 14))
+        self.game.display_text('Game Over', 40, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 5 * 3))
+        self.game.display_text('Press RETURN to Replay', 20, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 13))
+        self.game.display_text('Press ESC to return to Main Menu', 20,
+                               (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 14))
 
 
 class ScoreMenu(Menu):
@@ -193,20 +198,20 @@ class ScoreMenu(Menu):
         self.font_color = Constants.WHITE
 
     def display_content(self):
-        self.game.draw_text('SCORES', 80, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 2))
+        self.game.display_text('SCORES', 80, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 2))
         self.display_scores()
-        self.game.draw_text('Press ESC or RETURN to return to Main Menu', 20,
-                            (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 14))
+        self.game.display_text('Press ESC or RETURN to return to Main Menu', 20,
+                               (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 14))
 
     def display_scores(self):
         width = Constants.DISPLAY_W / 4
         height = Constants.DISPLAY_H / 12 * 5
 
-        self.game.draw_text("NAME", 40, (width, height))
-        self.game.draw_text("SCORE", 40, (width * 2, height))
-        self.game.draw_text("TIME(sec)", 40, (width * 3, height))
+        self.game.display_text("NAME", 40, (width, height))
+        self.game.display_text("SCORE", 40, (width * 2, height))
+        self.game.display_text("TIME(sec)", 40, (width * 3, height))
 
-        for i, score in enumerate(self.game.scores.get_best_users()):
+        for i, attribute in enumerate(self.game.scores.get_best_users()):
             height += Constants.DISPLAY_H / 12
             if i in range(3):
                 self.game.display.blit(self.medals[i], (width - 150, height - 20))
@@ -218,9 +223,9 @@ class ScoreMenu(Menu):
                     self.font_color = Constants.BRONZE
             else:
                 self.font_color = Constants.WHITE
-            self.game.draw_text(str(score.name), 25, (width, height), self.font_color)
-            self.game.draw_text(str(score.score), 25, (width * 2, height), self.font_color)
-            self.game.draw_text(str(score.time), 25, (width * 3, height), self.font_color)
+            self.game.display_text(str(attribute[0]), 25, (width, height), self.font_color)
+            self.game.display_text(str(attribute[1]), 25, (width * 2, height), self.font_color)
+            self.game.display_text(str(attribute[2]), 25, (width * 3, height), self.font_color)
 
 
 class CreditsMenu(Menu):
@@ -228,9 +233,9 @@ class CreditsMenu(Menu):
         Menu.__init__(self, game)
 
     def display_content(self):
-        self.game.draw_text('CREDITS', 80, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 3))
-        self.game.draw_text('Arthur PELLEGRINI', 30, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 6))
-        self.game.draw_text('Clement BRISSARD', 30, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 7))
-        self.game.draw_text('Osama RAHIM', 30, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 8))
-        self.game.draw_text('Press ESC or RETURN to return to Main Menu', 20, (
-            Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 14))
+        self.game.display_text('CREDITS', 80, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 3))
+        self.game.display_text('Arthur PELLEGRINI', 30, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 6))
+        self.game.display_text('Clement BRISSARD', 30, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 7))
+        self.game.display_text('Osama RAHIM', 30, (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 12 * 8))
+        self.game.display_text('Press ESC or RETURN to return to Main Menu', 20,
+                               (Constants.DISPLAY_W / 2, Constants.DISPLAY_H / 15 * 14))
