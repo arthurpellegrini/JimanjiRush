@@ -15,6 +15,34 @@ Voici les outils utilisés pour le développement de cette application :
 * PyCharm
 * Github
 
+Commandes
+--------------------------------------------------------------
+Lancer le projet
+````shell
+python main.py
+````
+
+Pour créer un exécutable dans le dossier 'build' :
+```shell
+python setup.py build
+```
+L'exécutable sera créé dans un des sous-dossiers de "build" suivant la version de l'application (Windows, Linux, MacOS).
+
+<u>Attention</u> : le script setup.py a été conçu pour un système Windows, par conséquent, il faudra modifier ce script
+afin de le faire fonctionner pour un autre système, tel que Linux/MacOS.
+
+Pour générer la documentation html : 
+```shell
+cd docs
+sphinx-apidoc -o .\source\ ..\
+sphinx-build -b html .\source\  html
+```
+
+Ensuite rendez-vous dans "docs\html" et lancez le fichier "index.html", afin de pouvoir visualiser la documentation.
+
+
+
+
 Fonctionnalités
 --------------------------------------------------------------
 L'utilisateur incarne un joueur qui peut se déplacer sur un axe horizontal et suivant la situation esquiver ou prendre
