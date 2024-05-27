@@ -8,7 +8,7 @@ Jimanji Rush
 Description
 --------------------------------------------------------------
 Ce projet a été réalisé dans le cadre du module Python de notre formation d'ingénieur en Informatique et Application à 
-l'ESIEE-IT. Jimanji Rush est un jeu 2D dans lequel le joueur doit éviter des boulets de canons qui tombent.
+l'ESIEE. Jimanji Rush est un jeu 2D dans lequel le joueur doit éviter des boulets de canons qui tombent.
 
 Voici les outils utilisés pour le développement de cette application : 
 * Python (en sa version 3.10) ainsi que la librairie Pygame
